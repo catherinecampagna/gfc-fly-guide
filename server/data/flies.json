@@ -1,6 +1,6 @@
 [
   {
-    "id": 101,
+    "_id": 101,
     "flyName": "Striper White/ Pink",
     "targetedFish": ["Striped Bass"],
     "typeOfWater": ["Saltwater"],
@@ -8,12 +8,11 @@
     "typeOfFly": "Wet Fly",
     "seasonality": ["Summer", "Fall"],
     "description": "A popular pattern that imitates small baitfish or other forage fish that striped bass prey on.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 102,
+    "_id": 102,
     "flyName": "Foam Hopper",
     "targetedFish": ["Trout"],
     "typeOfWater": ["Rivers and streams", "Stillwater"],
@@ -21,12 +20,10 @@
     "typeOfFly": "Dry Fly",
     "seasonality": ["Summer"],
     "description": "A classic dry fly designed to mimic the appearance of a grasshopper or a cricket, which are common food sources for trout during the summer months.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
-
   {
-    "id": 103,
+    "_id": 103,
     "flyName": "Wulff Bomber",
     "targetedFish": ["Trout", "Salmon"],
     "typeOfWater": ["Rivers and streams", "Stillwater", "Saltwater"],
@@ -34,12 +31,11 @@
     "typeOfFly": "Dry Fly",
     "seasonality": ["Spring", "Summer"],
     "description": "A versatile dry fly pattern that imitates a variety of insects such as caddis, stoneflies, and mayflies.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 104,
+    "_id": 104,
     "flyName": "Polar Shrimp",
     "targetedFish": ["Trout", "Steelhead", "Salmon"],
     "typeOfWater": ["Rivers and streams", "Stillwater", "Saltwater"],
@@ -51,12 +47,11 @@
     "typeOfFly": "Streamer",
     "seasonality": ["Winter", "Spring"],
     "description": "The fly features a light coloration and has a slender, shrimp-like profile with a weighted head to help it sink to the desired depth.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 105,
+    "_id": 105,
     "flyName": "Muddler Minnow",
     "targetedFish": ["Trout", "Bass", "Salmon"],
     "typeOfWater": ["Rivers and streams", "Stillwater", "Saltwater"],
@@ -69,12 +64,11 @@
     "typeOfFly": "Streamer",
     "seasonality": ["Spring", "Summer", "Fall", "Winter"],
     "description": "An effective streamer pattern that imitates a variety of aquatic and terrestrial creatures, such as sculpins and grasshoppers.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 106,
+    "_id": 106,
     "flyName": "Yellow Zonker-Muddler",
     "targetedFish": ["Trout", "Bass", "Salmon"],
     "typeOfWater": ["Rivers and streams", "Stillwater", "Saltwater"],
@@ -87,12 +81,10 @@
     "typeOfFly": "Streamer",
     "seasonality": ["Spring", "Summer", "Fall", "Winter"],
     "description": "A popular streamer pattern that imitates baitfish, with a strip of rabbit fur for added movement.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
-
   {
-    "id": 107,
+    "_id": 107,
     "flyName": "Bone Minnow",
     "targetedFish": ["Trout", "Bass", "Salmon"],
     "typeOfWater": ["Rivers and streams", "Stillwater", "Saltwater"],
@@ -105,12 +97,11 @@
     "typeOfFly": "Streamer",
     "seasonality": ["Spring", "Summer", "Fall", "Winter"],
     "description": "A streamer pattern with a realistic, lifelike appearance, effective for trout, salmon, and bass.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 108,
+    "_id": 108,
     "flyName": "White Wulff",
     "targetedFish": ["Trout"],
     "typeOfWater": ["Rivers and streams", "Stillwater"],
@@ -124,12 +115,11 @@
     "typeOfFly": "Dry Fly",
     "seasonality": ["Spring", "Summer"],
     "description": "A classic dry fly pattern, known for its high visibility and buoyancy, making it a popular choice among anglers for trout fishing.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 109,
+    "_id": 109,
     "flyName": "Ghost Stonefly",
     "targetedFish": ["Trout", "Bass", "Salmon"],
     "typeOfWater": ["Rivers and streams", "Stillwater", "Saltwater"],
@@ -143,12 +133,11 @@
     "typeOfFly": "Streamer",
     "seasonality": ["Spring", "Summer", "Fall", "Winter"],
     "description": "A versatile streamer pattern that imitates a variety of prey, such as leeches and minnows.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 110,
+    "_id": 110,
     "flyName": "Silver Rat",
     "targetedFish": ["Trout", "Salmon"],
     "typeOfWater": ["Rivers and streams", "Stillwater"],
@@ -162,12 +151,11 @@
     "typeOfFly": "Wet Fly",
     "seasonality": ["Fall"],
     "description": "A wet fly pattern that imitates caddis and stonefly nymphs, effective for trout and salmon.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 111,
+    "_id": 111,
     "flyName": "Green Butt Silver Hilton",
     "targetedFish": ["Atlantic Salmon, Steelhead"],
     "typeOfWater": ["Rivers and streams"],
@@ -180,7 +168,7 @@
   },
 
   {
-    "id": 112,
+    "_id": 112,
     "name": "Green Butt Skunk",
     "targeted_fish": ["Atlantic Salmon"],
     "type_of_water": ["Rivers and streams"],
@@ -188,12 +176,11 @@
     "type_of_fly": "Streamer",
     "seasonality": ["Fall"],
     "description": "A streamer pattern effective for Atlantic salmon, with a green tail and skunk fur for added movement.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 113,
+    "_id": 113,
     "name": "Thunder and Lightning",
     "targeted_fish": ["Atlantic Salmon"],
     "type_of_water": ["Rivers and streams"],
@@ -201,13 +188,11 @@
     "type_of_fly": "Streamer",
     "seasonality": ["Fall"],
     "description": "A classic streamer pattern for Atlantic salmon, with a combination of silver and gold tinsel for added flash.",
-
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 114,
+    "_id": 114,
     "name": "Ally's Shrimp",
     "targeted_fish": ["Atlantic Salmon"],
     "type_of_water": ["Rivers and streams"],
@@ -215,13 +200,11 @@
     "type_of_fly": "Wet Fly",
     "seasonality": ["Fall"],
     "description": "A popular wet fly pattern for Atlantic salmon, with a shrimp-like appearance and a red butt for added attraction.",
-    "image": "",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 115,
+    "_id": 115,
     "name": "Blue Charm",
     "targeted_fish": ["Atlantic Salmon"],
     "type_of_water": ["Rivers and streams"],
@@ -229,12 +212,11 @@
     "type_of_fly": "Wet Fly",
     "seasonality": ["Fall"],
     "description": "A classic wet fly pattern for Atlantic salmon, with a blue and silver body and a red throat for added attraction.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 116,
+    "_id": 116,
     "name": "Tiger Ghost",
     "targeted_fish": ["Trout", "Salmon"],
     "type_of_water": ["Rivers and streams"],
@@ -247,12 +229,11 @@
     "type_of_fly": "Streamer",
     "seasonality": ["Spring", "Summer", "Fall", "Winter"],
     "description": "An effective streamer pattern for trout and salmon, with a grey body and a wing of grey and white feathers.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 117,
+    "_id": 117,
     "name": "Woolly Bugger",
     "targeted_fish": ["Trout", "Bass", "Salmon"],
     "type_of_water": ["Rivers and streams", "Stillwater", "Saltwater"],
@@ -264,12 +245,11 @@
     "type_of_fly": "Streamer",
     "seasonality": ["Spring", "Summer", "Fall", "Winter"],
     "description": "A versatile streamer pattern effective for a variety of species, with a marabou tail and a hackle and chenille body.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 118,
+    "_id": 118,
     "fly_name": "Intruder HG Chartreuse",
     "targeted_fish": ["Steelhead"],
     "type_of_water": ["Rivers and streams", "Stillwater", "Saltwater"],
@@ -281,12 +261,11 @@
     "type_of_fly": "Streamer",
     "seasonality": ["Spring", "Winter"],
     "description": "A popular steelhead fly pattern, with a variety of materials and colors for added movement and attraction.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 119,
+    "_id": 119,
     "fly_name": "Egg Sucking Leech",
     "targeted_fish": ["Steelhead"],
     "type_of_water": ["Rivers and streams", "Stillwater", "Saltwater"],
@@ -299,12 +278,11 @@
     "type_of_fly": "Streamer",
     "seasonality": ["Spring", "Winter"],
     "description": "An effective streamer pattern for steelhead and salmon, with a bright egg-shaped beadhead and a woolly leech body.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 120,
+    "_id": 120,
     "fly_name": "Purple Intruder Leech",
     "targeted_fish": ["Steelhead"],
     "type_of_water": ["Rivers and streams", "Stillwater", "Saltwater"],
@@ -317,12 +295,11 @@
     "type_of_fly": "Streamer",
     "seasonality": ["Spring", "Winter"],
     "description": "A variation of the Intruder fly, with a purple body and a marabou tail for added movement.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   },
 
   {
-    "id": 121,
+    "_id": 121,
     "fly_name": "Kalama Special",
     "targeted_fish": ["Steelhead"],
     "type_of_water": ["Rivers and streams"],
@@ -334,7 +311,6 @@
     "type_of_fly": "Streamer",
     "seasonality": ["Summer", "Fall"],
     "description": "It was developed on the Kalama River in Washington state, and is typically fished using a swinging technique with a two-handed rod.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": []
   }
 ]
