@@ -4,7 +4,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const port = 8888;
-const { createUser, getFlies, getFly, toggleFavorite, postReview, updateReview, deleteReview } = require("./handlers");
+const { getFlies, getFly, getUser, getUserFavorites, getUserReviews, createUser, toggleFavorite, getReviews, postReview, updateReview, deleteReview } = require("./handlers");
 const bodyParser = require("body-parser"); 
 
 
@@ -22,7 +22,12 @@ express()
 // REST endpoints
 .get("/flies", getFlies) // endpoint to get all flies
 .get("/fly/:_id", getFly) // endpoint to get a specific fly by id
-.get("/user/:id", getUser) // endpoint to get user info
+.get("/user/:_id", getUser) // endpoint to get user info
+.get("/user/:_id/favoriteFlies", getUserFavorites) // endpoint to get user's favorite flies
+.get("/user/:_id/reviews", getUserReviews) // endpoint to get user's reviews
+.get("/fly/:_id/reviews", getReviews) // endpoint to get reviews for a specific fly
+
+
 .post("/user/:_id", createUser) // endpoint to create a user
 .put("/user/:_id/favoriteFlies", toggleFavorite) // endpoint to add a fly to favorites
 .post("/fly/:_id/reviews", postReview) // endpoint to post a new review for a fly

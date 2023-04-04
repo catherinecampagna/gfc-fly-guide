@@ -8,9 +8,9 @@ const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
 
   return (
-    <ScrollButton className="button1" onClick={() => loginWithRedirect()}>
+    <Button className="button1" onClick={() => loginWithRedirect()}>
       Log In
-    </ScrollButton>
+    </Button>
   );
 };
 
@@ -62,7 +62,7 @@ const Landing = ({ onLogin }) => {
         {isAuthenticated ? (
           <>
             <LoginCard>
-              <Title>Hi, {user.name}!</Title>
+              <CardTitle>Hi, {user.name}!</CardTitle>
               <ButtonContainer>
                 <ScrollButton
                   className="button1"
@@ -70,21 +70,21 @@ const Landing = ({ onLogin }) => {
                   smooth={true}
                   duration={500}
                 >
-                  Take the quiz
+                  Find the perfect fly
                 </ScrollButton>
-                <BrowseButton className="button1" to="/topflies">
-                  Browse Flies
-                </BrowseButton>
-                <FlyBoxButton className="button1" to="/flybox">
-                  Your Fly Box
-                </FlyBoxButton>
-                <LogoutButton
-                  className="button1"
+                <Button className="button1" href="/topflies">
+                  Browse our Top Flies
+                </Button>
+                <Button className="button1" href="/flybox">
+                  Go to your Fly Box
+                </Button>
+              </ButtonContainer>
+                <LogoutLink
+                  href="#"
                   onClick={() => logout({ returnTo: window.location.origin })}
                 >
                   Log Out
-                </LogoutButton>
-              </ButtonContainer>
+                </LogoutLink>
             </LoginCard>
           </>
         ) : (
@@ -125,58 +125,17 @@ const LeftContainer = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
-  margin-top: 24px;
+  margin-top: 10px;
 `;
 
-const BrowseButton = styled(Link)`
-  margin: 0 12px;
-  padding: 12px 16px;
-  background-color: #013926;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  text-decoration: none;
-
-  &:hover {
-    background-color: #02664c;
-  }
-`;
-
-const FlyBoxButton = styled(Link)`
-  margin: 0 12px;
-  padding: 12px 16px;
-  background-color: #f5fffa;
+const LogoutLink = styled.a`
   color: #013926;
-  border: 2px solid #013926;
-  border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
-  text-decoration: none;
-
-  &:hover {
-    background-color: #013926;
-    color: #f5fffa;
-  }
-`;
-
-const LogoutButton = styled.button`
-  margin: 0 12px;
-  padding: 12px 16px;
-  background-color: #f5fffa;
-  color: #013926;
-  border: 2px solid #013926;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #013926;
-    color: #f5fffa;
-  }
+  text-decoration: underline;
+  margin-left: auto;
 `;
 
 const Logo = styled.img`
@@ -204,6 +163,12 @@ const Title = styled.p`
   font-size: 36px;
   font-style: italic;
   margin-bottom: 12px;
+`;
+
+const CardTitle = styled.p`
+  font-size: 36px;
+  font-style: italic;
+  color: #013926 ;
 `;
 
 const Description = styled.p`
@@ -237,16 +202,38 @@ const LoginCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
   width: 400px;
-  height: 225px;
+  height: auto;
 `;
 
 const ScrollButton = styled(Link)`
+  margin-top: 4px;
+  margin-bottom: 4px;
+font-size: 16px;
+padding: 15px;
+width: 230px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+`;
+
+const Button = styled.a`
+  margin-top: 4px;
+  margin-bottom: 4px;
+font-size: 16px;
+padding: 15px;
+width: 230px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-1px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   }
 `;

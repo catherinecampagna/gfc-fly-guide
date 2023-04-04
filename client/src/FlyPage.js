@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
+import ReviewCard from "./components/ReviewCard";
 
 const FlyPage = () => {
   const { id } = useParams();
@@ -58,6 +59,9 @@ const FlyPage = () => {
             </CardLeft>
             <CardRight><Image src={`/images/flies/${fly._id}.png`} alt={fly.flyName} /></CardRight>
           </Card>
+          <ReviewContainer>
+              <ReviewCard flyId={id} />
+            </ReviewContainer>
           </RightContainer>
          
         </>
@@ -90,23 +94,10 @@ position: fixed;
   top: 100px;
 `;
 
-const BackLink = styled.a`
-  display: flex;
-  align-items: center;
-  color: #013926;
-  margin-bottom: 16px;
-  text-decoration: none;
-`;
+const ReviewContainer = styled.div`
+margin-top: 50px;
+overflow: auto;
 
-const HiButton = styled.button`
-  margin-top: auto;
-  padding: 12px 16px;
-  background-color: #013926;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
 `;
 
 const Title = styled.h1`
@@ -118,8 +109,8 @@ const Title = styled.h1`
 `;
 
 const Card = styled.div`
+overflow: scroll;
   flex: 1;
-
 display: flex;
 border: 1px solid #ccc;
   background-color: #C6D8CF;

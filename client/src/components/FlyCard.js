@@ -70,7 +70,7 @@ const FlyCard = ({ fly }) => {
             </CardContent>
           </Link>
           <HeartContainer onClick={handleFavoriteClick}>
-            <HeartIcon isFavorite={isFavorite} />
+            <HeartIcon isfavorite={isFavorite} />
           </HeartContainer>
         </>
       )}
@@ -130,7 +130,7 @@ const HeartContainer = styled.div`
 `;
 
 const HeartIcon = styled(FiHeart)`
-  color: ${(props) => (props.isFavorite ? "red" : "gray")};
+  color: ${(props) => (props.isfavorite ? "red" : "gray")};
 `;
 
 export default FlyCard;

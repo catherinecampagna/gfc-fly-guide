@@ -163,17 +163,16 @@
     "typeOfFly": "Streamer",
     "seasonality": ["Summer", "Winter"],
     "description": "A classic steelhead fly pattern that is effective for both summer and winter steelhead.",
-    "reviews": {},
-    "ratings": {}
+    "reviews": {}
   },
 
   {
     "_id": 112,
-    "name": "Green Butt Skunk",
-    "targeted_fish": ["Atlantic Salmon"],
-    "type_of_water": ["Rivers and streams"],
-    "region_in_canada": ["Eastern Canada", "Atlantic Canada"],
-    "type_of_fly": "Streamer",
+    "flyName": "Green Butt Skunk",
+    "targetedFish": ["Atlantic Salmon"],
+    "typeOfWater": ["Rivers and streams"],
+    "regionInCanada": ["Eastern Canada", "Atlantic Canada"],
+    "typeOfFly": "Streamer",
     "seasonality": ["Fall"],
     "description": "A streamer pattern effective for Atlantic salmon, with a green tail and skunk fur for added movement.",
     "reviews": []
@@ -181,10 +180,10 @@
 
   {
     "_id": 113,
-    "name": "Thunder and Lightning",
-    "targeted_fish": ["Atlantic Salmon"],
-    "type_of_water": ["Rivers and streams"],
-    "region_in_canada": ["Eastern Canada", "Atlantic Canada"],
+    "flyName": "Thunder and Lightning",
+    "targetedFish": ["Atlantic Salmon"],
+    "typeOfWater": ["Rivers and streams"],
+    "regionInCanada": ["Eastern Canada", "Atlantic Canada"],
     "type_of_fly": "Streamer",
     "seasonality": ["Fall"],
     "description": "A classic streamer pattern for Atlantic salmon, with a combination of silver and gold tinsel for added flash.",
@@ -193,11 +192,11 @@
 
   {
     "_id": 114,
-    "name": "Ally's Shrimp",
-    "targeted_fish": ["Atlantic Salmon"],
-    "type_of_water": ["Rivers and streams"],
-    "region_in_canada": ["Eastern Canada", "Atlantic Canada"],
-    "type_of_fly": "Wet Fly",
+    "flyName": "Ally's Shrimp",
+    "targetedFish": ["Atlantic Salmon"],
+    "typeOfWater": ["Rivers and streams"],
+    "regionInCanada": ["Eastern Canada", "Atlantic Canada"],
+    "typeOfFly": "Wet Fly",
     "seasonality": ["Fall"],
     "description": "A popular wet fly pattern for Atlantic salmon, with a shrimp-like appearance and a red butt for added attraction.",
     "reviews": []
@@ -205,11 +204,11 @@
 
   {
     "_id": 115,
-    "name": "Blue Charm",
-    "targeted_fish": ["Atlantic Salmon"],
-    "type_of_water": ["Rivers and streams"],
-    "region_in_canada": ["Eastern Canada", "Atlantic Canada"],
-    "type_of_fly": "Wet Fly",
+    "flyName": "Blue Charm",
+    "targetedFish": ["Atlantic Salmon"],
+    "typeOfWater": ["Rivers and streams"],
+    "regionInCanada": ["Eastern Canada", "Atlantic Canada"],
+    "typeOfFly": "Wet Fly",
     "seasonality": ["Fall"],
     "description": "A classic wet fly pattern for Atlantic salmon, with a blue and silver body and a red throat for added attraction.",
     "reviews": []
@@ -217,16 +216,16 @@
 
   {
     "_id": 116,
-    "name": "Tiger Ghost",
-    "targeted_fish": ["Trout", "Salmon"],
-    "type_of_water": ["Rivers and streams"],
-    "region_in_canada": [
+    "flyName": "Tiger Ghost",
+    "targetedFish": ["Trout", "Salmon"],
+    "typeOfWater": ["Rivers and streams"],
+    "regionInCanada": [
       "Western Canada",
       "Northern Canada",
       "Pacific Northwest",
       "Atlantic Canada"
     ],
-    "type_of_fly": "Streamer",
+    "typeOfFly": "Streamer",
     "seasonality": ["Spring", "Summer", "Fall", "Winter"],
     "description": "An effective streamer pattern for trout and salmon, with a grey body and a wing of grey and white feathers.",
     "reviews": []
@@ -234,15 +233,15 @@
 
   {
     "_id": 117,
-    "name": "Woolly Bugger",
-    "targeted_fish": ["Trout", "Bass", "Salmon"],
-    "type_of_water": ["Rivers and streams", "Stillwater", "Saltwater"],
-    "region_in_canada": [
+    "flyName": "Woolly Bugger",
+    "targetedFish": ["Trout", "Bass", "Salmon"],
+    "typeOfWater": ["Rivers and streams", "Stillwater", "Saltwater"],
+    "regionInCanada": [
       "Western Canada",
       "Northern Canada",
       "Pacific Northwest"
     ],
-    "type_of_fly": "Streamer",
+    "typeOfFly": "Streamer",
     "seasonality": ["Spring", "Summer", "Fall", "Winter"],
     "description": "A versatile streamer pattern effective for a variety of species, with a marabou tail and a hackle and chenille body.",
     "reviews": []
@@ -250,15 +249,15 @@
 
   {
     "_id": 118,
-    "fly_name": "Intruder HG Chartreuse",
-    "targeted_fish": ["Steelhead"],
-    "type_of_water": ["Rivers and streams", "Stillwater", "Saltwater"],
-    "region_in_canada": [
+    "flyName": "Intruder HG Chartreuse",
+    "targetedFish": ["Steelhead"],
+    "typeOfWater": ["Rivers and streams", "Stillwater", "Saltwater"],
+    "regionInCanada": [
       "Western Canada",
       "Northern Canada",
       "Pacific Northwest"
     ],
-    "type_of_fly": "Streamer",
+    "typeOfFly": "Streamer",
     "seasonality": ["Spring", "Winter"],
     "description": "A popular steelhead fly pattern, with a variety of materials and colors for added movement and attraction.",
     "reviews": []
@@ -266,16 +265,16 @@
 
   {
     "_id": 119,
-    "fly_name": "Egg Sucking Leech",
-    "targeted_fish": ["Steelhead"],
-    "type_of_water": ["Rivers and streams", "Stillwater", "Saltwater"],
-    "region_in_canada": [
+    "flyName": "Egg Sucking Leech",
+    "targetedFish": ["Steelhead"],
+    "typeOfWater": ["Rivers and streams", "Stillwater", "Saltwater"],
+    "regionInCanada": [
       "Western Canada",
       "Northern Canada",
       "Pacific Northwest",
       "Atlantic Canada"
     ],
-    "type_of_fly": "Streamer",
+    "typeOfFly": "Streamer",
     "seasonality": ["Spring", "Winter"],
     "description": "An effective streamer pattern for steelhead and salmon, with a bright egg-shaped beadhead and a woolly leech body.",
     "reviews": []
@@ -283,16 +282,16 @@
 
   {
     "_id": 120,
-    "fly_name": "Purple Intruder Leech",
-    "targeted_fish": ["Steelhead"],
-    "type_of_water": ["Rivers and streams", "Stillwater", "Saltwater"],
-    "region_in_canada": [
+    "flyName": "Purple Intruder Leech",
+    "targetedFish": ["Steelhead"],
+    "typeOfWater": ["Rivers and streams", "Stillwater", "Saltwater"],
+    "regionInCanada": [
       "Western Canada",
       "Northern Canada",
       "Pacific Northwest",
       "Atlantic Canada"
     ],
-    "type_of_fly": "Streamer",
+    "typeOfFly": "Streamer",
     "seasonality": ["Spring", "Winter"],
     "description": "A variation of the Intruder fly, with a purple body and a marabou tail for added movement.",
     "reviews": []
@@ -300,15 +299,15 @@
 
   {
     "_id": 121,
-    "fly_name": "Kalama Special",
-    "targeted_fish": ["Steelhead"],
-    "type_of_water": ["Rivers and streams"],
-    "region_in_canada": [
+    "flyName": "Kalama Special",
+    "targetedFish": ["Steelhead"],
+    "typeOfWater": ["Rivers and streams"],
+    "regionInCanada": [
       "Western Canada",
       "Northern Canada",
       "Pacific Northwest"
     ],
-    "type_of_fly": "Streamer",
+    "typeOfFly": "Streamer",
     "seasonality": ["Summer", "Fall"],
     "description": "It was developed on the Kalama River in Washington state, and is typically fished using a swinging technique with a two-handed rod.",
     "reviews": []

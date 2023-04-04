@@ -5,12 +5,9 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Sidebar from "./components/Sidebar";
 
 
-
 const TopFlies = () => {
   const [flies, setFlies] = useState([]);
   const { user } = useAuth0();
-
-
 
   useEffect(() => {
     async function fetchFlies() {

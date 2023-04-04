@@ -1,10 +1,36 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
 import { UserContext } from "./UserContext";
+import FlyCard from "./components/FlyCard";
 
 const UserPage = () => {
   const { user } = useContext(UserContext);
+  const [favoriteFlies, setFavoriteFlies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserFavorites = async () => {
+      try {
+        setLoading(true); // Set loading state to true
+        const response = await fetch(`/user/${user.email}/favoriteFlies`);
+        const data = await response.json();
+        const favoriteFliesWithId = data.favoriteFlies.map((fly) => ({
+          ...fly,
+          _id: fly.flyId,
+        }));
+        setFavoriteFlies(favoriteFliesWithId);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false); // Set loading state to false
+      }
+    };
+
+    if (user) {
+      fetchUserFavorites();
+    }
+  }, [user]);
 
   return (
     <Container>
@@ -15,27 +41,15 @@ const UserPage = () => {
         <Title>Your Fly Box</Title>
       </LeftContainer>
       <RightContainer>
-        <ReviewedSection>
-          {user.reviews.length > 0 ? (
-            <div>
-              <h2>Your reviewed flies:</h2>
-              <ul>
-                {user.reviews.map((review) => (
-                  <li key={review.flyId}>{review.comment}</li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <p>You have not reviewed any flies yet.</p>
-          )}
-        </ReviewedSection>
         <FavouriteSection>
-          {user.favoriteFlies.length > 0 ? (
+          {loading ? (
+            <p>Loading...</p>
+          ) : favoriteFlies && favoriteFlies.length > 0 ? (
             <div>
               <h2>Your favourite flies:</h2>
               <ul>
-                {user.favoriteFlies.map((flyId) => (
-                  <li key={flyId}>{flyId}</li>
+                {favoriteFlies.map((fly) => (
+                  <FlyCard key={fly._id} fly={fly} />
                 ))}
               </ul>
             </div>
@@ -86,15 +100,9 @@ const RightContainer = styled.div`
   overflow: scroll;
 `;
 
-const ReviewedSection = styled.div`
-  font-family: var(--font-family-heading);
-  color: #013926;
-`;
-
 const FavouriteSection = styled.div`
   font-family: var(--font-family-heading);
   color: #013926;
 `;
-
 
 export default UserPage;

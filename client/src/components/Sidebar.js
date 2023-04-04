@@ -35,26 +35,15 @@ const Sidebar = () => {
 
 const Container = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
   width: 200px;
-  background-color: #FFF;
-  padding: 20px;
   display: flex;
   flex-direction: column;
 `;
 
-const HiButton = styled.button`
-  margin-bottom: 20px;
-  padding: 12px 16px;
-  background-color: #013926;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-`;
+const HiButton = styled(Link)`
+ color: #013926;
+  text-decoration: none;
+  `;
 
 const Nav = styled.nav`
   margin-top: auto;
