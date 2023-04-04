@@ -12,6 +12,7 @@ const GlobalStyles = createGlobalStyle`
     --color-accent: #ffdc34;
     --font-family-heading: 'Noto Serif Display', serif;
     --font-family-body: 'Crimson Pro', serif;
+    --font-family-other: sans-serif;
     --font-weight-normal: 300;
     --font-weight-bold: bold;
     --font-style-normal: normal;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
 
 const FlyPage = () => {
   const { id } = useParams();
@@ -24,18 +24,20 @@ const FlyPage = () => {
       {fly ? (
         <>
           <LeftContainer>
-            <Link to="/topflies">
-              <BackButton className="button3">Back</BackButton>
-            </Link>
+             <TopLeftContainer>
+          <Sidebar />
+        </TopLeftContainer>
+        <Title>The {fly.flyName}</Title>
           </LeftContainer>
-          <Card>
-          <MiddleContainer>
-            <FlyMain>
-              <FlyName>{fly.flyName}</FlyName>
+          <RightContainer>
+            <Card>
+          <CardLeft> 
+            <FlyName>{fly.flyName}</FlyName>
               <Type classname="fly-types">{fly.typeOfFly}</Type>
-            </FlyMain>
+            <Section>About this fly</Section>
+            <Description>{fly.description}</Description>
             <BestFor>
-              <Title>Best for</Title>
+              <Section>Best for</Section>
               <Row>
                 <Category>Species</Category>
                 <Answer>{fly.targetedFish.join(", ")}</Answer>
@@ -53,13 +55,11 @@ const FlyPage = () => {
                 <Answer>{fly.regionInCanada.join(", ")}</Answer>
               </Row>
             </BestFor>
-            <Title>About this fly</Title>
-            <Description>{fly.description}</Description>
-          </MiddleContainer>
-          <RightContainer>
-            <Image src={`/images/flies/${fly._id}.png`} alt={fly.flyName} />
-          </RightContainer>
+            </CardLeft>
+            <CardRight><Image src={`/images/flies/${fly._id}.png`} alt={fly.flyName} /></CardRight>
           </Card>
+          </RightContainer>
+         
         </>
       ) : (
         <div>Loading...</div>
@@ -85,6 +85,38 @@ const LeftContainer = styled.div`
   justify-content: flex-end;
 `;
 
+const TopLeftContainer = styled.div`
+position: fixed;
+  top: 100px;
+`;
+
+const BackLink = styled.a`
+  display: flex;
+  align-items: center;
+  color: #013926;
+  margin-bottom: 16px;
+  text-decoration: none;
+`;
+
+const HiButton = styled.button`
+  margin-top: auto;
+  padding: 12px 16px;
+  background-color: #013926;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+`;
+
+const Title = styled.h1`
+  width: 20%;
+  font-family: var(--font-family-heading);
+  color: #013926;
+  position: fixed;
+  bottom: 100px;
+`;
+
 const Card = styled.div`
   flex: 1;
 
@@ -96,7 +128,7 @@ border: 1px solid #ccc;
   height: 550px;
 `;
 
-const MiddleContainer = styled.div`
+const CardLeft = styled.div`
   flex: 1;
 
   padding: 20px 50px;
@@ -105,11 +137,8 @@ const MiddleContainer = styled.div`
   width: 400px;
 `;
 
-const FlyMain = styled.div``;
-
 const BestFor = styled.div`
   color: var(--color-text-secondary);
-  margin-bottom: 50px;
 `;
 
 const Row = styled.div`
@@ -124,13 +153,13 @@ const Category = styled.div`
   font-size: 16px;
 `;
 
-const Title = styled.h6`
+const Section = styled.h6`
   color: var(--color-text-secondary);
   padding-bottom: 10px;
 font-style: italic;
 `;
 
-const RightContainer = styled.div`
+const CardRight = styled.div`
   flex: 1;
 
   padding: 20px;
@@ -164,21 +193,13 @@ const Description = styled.p`
   color: var(--color-text-secondary);
 `;
 
-const BackButton = styled.button`
-  color: var(--color-text-secondary);
-  font-family: var(--font-family-body);
-  font-weight: 300;
-  border: 1px solid var(--color-text-secondary);
-  font-family: var(--font-family-body);
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  position: fixed;
-  bottom: 100px;
-
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  }
+const RightContainer = styled.div`
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-secondary);
+  overflow: scroll;
 `;
+
 
 export default FlyPage;

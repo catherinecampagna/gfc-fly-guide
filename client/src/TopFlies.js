@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FlyCard from "./components/FlyCard";
+import { useAuth0 } from '@auth0/auth0-react';
+import Sidebar from "./components/Sidebar";
+
+
 
 const TopFlies = () => {
   const [flies, setFlies] = useState([]);
+  const { user } = useAuth0();
+
+
 
   useEffect(() => {
     async function fetchFlies() {
@@ -18,6 +25,9 @@ const TopFlies = () => {
   return (
     <Container>
       <LeftContainer>
+        <TopLeftContainer>
+            <Sidebar />
+        </TopLeftContainer>
         <Title>Discover our Top Flies</Title>
       </LeftContainer>
       <RightContainer>
@@ -43,7 +53,29 @@ const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  
+`;
+const TopLeftContainer = styled.div`
+position: fixed;
+  top: 100px;
+`;
+
+const BackLink = styled.a`
+  display: flex;
+  align-items: center;
+  color: #013926;
+  margin-bottom: 16px;
+  text-decoration: none;
+`;
+
+const HiButton = styled.button`
+  margin-top: auto;
+  padding: 12px 16px;
+  background-color: #013926;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
 `;
 
 const Title = styled.h1`
@@ -70,7 +102,6 @@ const FlyCardList = styled.div`
     flex-basis: calc(25% - 32px);
     margin: 16px;
   }
-
 `;
 
 export default TopFlies;
