@@ -4,7 +4,9 @@
 const express = require("express");
 const morgan = require("morgan");
 const port = 8888;
-const { getFlies, getFly, getUser, getUserFavorites, getUserReviews, createUser, toggleFavorite, getReviews, postReview, updateReview, deleteReview } = require("./handlers");
+const { getFlies, getFly, getUserFavorites, getUserReviews, createUser,
+  addFavorite,
+  removeFavorite, getReviews, postReview, updateReview, deleteReview } = require("./handlers");
 const bodyParser = require("body-parser"); 
 
 
@@ -22,17 +24,15 @@ express()
 // REST endpoints
 .get("/flies", getFlies) // endpoint to get all flies
 .get("/fly/:_id", getFly) // endpoint to get a specific fly by id
-.get("/user/:_id", getUser) // endpoint to get user info
 .get("/user/:_id/favoriteFlies", getUserFavorites) // endpoint to get user's favorite flies
 .get("/user/:_id/reviews", getUserReviews) // endpoint to get user's reviews
 .get("/fly/:_id/reviews", getReviews) // endpoint to get reviews for a specific fly
-
-
 .post("/user/:_id", createUser) // endpoint to create a user
-.put("/user/:_id/favoriteFlies", toggleFavorite) // endpoint to add a fly to favorites
 .post("/fly/:_id/reviews", postReview) // endpoint to post a new review for a fly
 .put("/fly/:_id/reviews/:reviewId", updateReview) // endpoint to update an existing review for a fly
 .delete("/fly/:_id/reviews/:reviewId", deleteReview) // endpoint to delete a review for a fly
+.put("/user/:_id/favoriteFlies", addFavorite) // Endpoint to add a fly to user's favorite flies list
+.put("/user/:_id/favoriteFlies/:flyId", removeFavorite) // Endpoint to remove a fly from user's favorite flies list
 
 // TEST endpoints
 .get("/test", (req, res) => {

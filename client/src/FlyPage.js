@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
 import ReviewCard from "./components/ReviewCard";
 
+
 const FlyPage = () => {
   const { id } = useParams();
   const [fly, setFly] = useState(null);
@@ -60,8 +61,8 @@ const FlyPage = () => {
             <CardRight><Image src={`/images/flies/${fly._id}.png`} alt={fly.flyName} /></CardRight>
           </Card>
           <ReviewContainer>
-              <ReviewCard flyId={id} />
-            </ReviewContainer>
+            <ReviewCard />
+              </ReviewContainer>
           </RightContainer>
          
         </>

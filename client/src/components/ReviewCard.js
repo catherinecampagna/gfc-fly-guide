@@ -1,45 +1,40 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import Review from "./Review";
 import ReviewPost from "./ReviewPost";
+import Review from "./Review";
 
-const ReviewCard = ({ flyId }) => {
-  const [reviews, setReviews] = useState([]);
-  const [status, setStatus] = useState("idle");
-  const [refresh, setRefresh] = useState(false);
+const ReviewCard = () => {
+  const { id } = useParams();
+  const [fly, setFly] = useState(null);
 
   useEffect(() => {
-    fetch(`/fly/${flyId}/reviews`)
+    fetch(`/fly/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 400 || data.status === 500) {
-          throw new Error("error");
+          throw new Error("Error");
         }
-        setReviews(data);
-        setStatus("active");
-      })
-      .catch((error) => {
-        console.log(error);
-        setStatus("error");
+        setFly(data.data);
       });
-  }, [refresh]);
-
-  const refreshReviews = () => {
-    setRefresh(!refresh);
-  };
+  }, [id]);
 
   return (
     <Wrapper>
-      {status === "idle" ? (
-        <div>Loading reviews...</div>
-        ) : status === "error" ? (
-          <div>Failed to load reviews.</div>
-          ) : reviews.length > 0 ? (
-            reviews.map((review) => <Review key={review.id} review={review} />)
-            ) : (
-              <div>No reviews yet for this fly.</div>
+      {fly ? (
+        <>
+          {fly.reviews.length > 0 ? (
+                fly.reviews.map((review) => (
+                  <Review key={review._id} review={review} />
+                ))
+              ) : (
+                <div>No reviews yet for this fly.</div>
               )}
-              <ReviewPost flyId={flyId} refreshReviews={refreshReviews} />
+          <ReviewPost flyId={id} />
+        </>
+      ) : (
+        <div>Loading...</div>
+      )}
     </Wrapper>
   );
 };

@@ -1,18 +1,20 @@
 import styled from "styled-components";
+import moment from 'moment';
 
 const Review = ({ review }) => {
-  const { author, text, createdAt } = review;
+  const { author, reviewText, date } = review;
 
-  const formattedDate = new Date(createdAt).toLocaleString();
+  const formattedDate = moment(date).format('YYYY-MM-DD');
 
   return (
     <Wrapper>
-      <Author>{author.name}</Author>
-      <Text>{text}</Text>
+      {author && author.name && <Author>{author.name}</Author>}
+      <Text>{reviewText}</Text>
       <Date>{formattedDate}</Date>
     </Wrapper>
   );
 };
+
 
 const Wrapper = styled.div`
   display: flex;
