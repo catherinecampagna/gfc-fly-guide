@@ -1,11 +1,9 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-scroll";
 import styled from "styled-components";
 import GlobalStyles from "../GlobalStyles";
-import { UserContext } from "../UserContext";
 
-// Button component for logging in
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
 
@@ -16,8 +14,7 @@ const LoginButton = () => {
   );
 };
 
-// Function for creating a new user
-const createUser = async (email, name, updateUser) => {
+const createUser = async (email, name) => {
   console.log("createUser called with", email, name);
 
   const response = await fetch("/user/:_id", {
@@ -33,30 +30,21 @@ const createUser = async (email, name, updateUser) => {
   const data = await response.json();
   console.log("createUser response", data);
 
-  // Update the user context with the new user's email and name
-  updateUser({ email, name });
+  return data;
 };
 
-// Landing component
-const Landing = () => {
-    // Authentication and user context data
+const Landing = ({ onLogin }) => {
   const { isAuthenticated, user, logout } = useAuth0();
-  const { user: contextUser, updateUser } = useContext(UserContext);
 
-  // Check if the user is authenticated and if the user context is empty, then create a new user
   useEffect(() => {
-    const updateUserContext = async () => {
-      if (isAuthenticated && user.email && user.name && !contextUser.email && !contextUser.name) {
-        console.log("email:", user.email);
-        console.log("name:", user.name);
-        await createUser(user.email, user.name, updateUser);
-      }
-    };
+    if (isAuthenticated && user.email && user.name) {
+      console.log("email:", user.email);
+      console.log("name:", user.name);
+      createUser(user.email, user.name);
+      onLogin();
+    }
+  }, [isAuthenticated, onLogin, user]);
 
-    updateUserContext();
-  }, [isAuthenticated, user, updateUser, contextUser.email, contextUser.name]);
-
-    // Landing page UI
   return (
     <Container>
       <LeftContainer>
