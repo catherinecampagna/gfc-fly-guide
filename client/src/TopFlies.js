@@ -30,7 +30,7 @@ const TopFlies = () => {
       <RightContainer>
         <FlyCardList>
           {flies.map((fly) => (
-            <FlyCard key={fly.id} fly={fly} />
+            <FlyCard key={fly._id} fly={fly} />
           ))}
         </FlyCardList>
       </RightContainer>

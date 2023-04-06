@@ -2,6 +2,7 @@
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 const { MongoClient } = require("mongodb");
+const { v4: uuidv4 } = require('uuid');
 
 const options = {
   useNewUrlParser: true,
@@ -40,8 +41,8 @@ const createUser = async (req, res) => {
   client.close();
 };
 
-// ** Get a user's favorite flies **
-const getUserFavorites = async (req, res) => {
+// ** Get a user's info **
+const getUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   try {
     await client.connect();
@@ -52,6 +53,28 @@ const getUserFavorites = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  } finally {
+    await client.close();
+  }
+};
+
+// ** Get a user's favorite flies **
+const getUserFavorites = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db("FlyGuide");
+    const email = req.params._id;
+    const user = await db
+      .collection("Users")
+      .findOne({ email }, { favoriteFlies: 1 });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(user.favoriteFlies);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -122,25 +145,39 @@ const getFly = async (req, res) => {
   }
 };
 
-// ** Add fly to favorite **
-const addFavorite = async (req, res) => {
+// ** Add/ remove fly to/ from favorites **
+const updateFavorites = async (req, res) => {
   const userId = req.params._id;
-  const { flyId } = req.body;
+  const flyId = Number(req.body.flyId);
   const client = new MongoClient(MONGO_URI, options);
   try {
     await client.connect();
     const db = client.db("FlyGuide");
+    let message;
+    let result;
     // Adding the fly id to the user's favorite flies array using $addToSet to avoid duplicates
-    const result = await db
-      .collection("Users")
-      .updateOne({ _id: userId }, { $addToSet: { favoriteFlies: flyId } });
+    const user = await db.collection("Users").findOne({ _id: userId });
+
+    if (user.favoriteFlies.includes(flyId)) {
+      // is already in array remove it
+      result = await db
+        .collection("Users")
+        .updateOne({ _id: userId }, { $pull: { favoriteFlies: flyId } });
+        message = "Fly removed from favorites"
+    } else {
+      result = await db
+        .collection("Users")
+        .updateOne({ _id: userId }, { $addToSet: { favoriteFlies: flyId } });
+        message = "Fly added to favorites"
+
+    }
     // If the modifiedCount property of the result object is truthy, return a success response
     // Otherwise, return a failure response
     result.modifiedCount
-      ? res.status(200).json({ status: 200, message: "Fly added to favorites" })
+      ? res.status(200).json({ status: 200, message: message })
       : res
           .status(400)
-          .json({ status: 400, message: "Failed to add fly to favorites" });
+          .json({ status: 400, message: "Failed update favorites" });
   } catch (error) {
     res.status(500).json({ status: 500, message: error });
   } finally {
@@ -148,35 +185,10 @@ const addFavorite = async (req, res) => {
   }
 };
 
-// ** Remove fly to favorite **
-const removeFavorite = async (req, res) => {
-  const userId = req.params._id;
-  const { flyId } = req.body;
-  const client = new MongoClient(MONGO_URI, options);
-  try {
-    await client.connect();
-    const db = client.db("FlyGuide");
-    // Remove the fly from the user's favorites list
-    const result = await db
-      .collection("Users")
-      .updateOne({ _id: userId }, { $pull: { favoriteFlies: flyId } });
-    // Return a success or error response
-    result.modifiedCount
-      ? res
-          .status(200)
-          .json({ status: 200, message: "Fly removed from favorites" })
-      : res.status(400).json({
-          status: 400,
-          message: "Failed to remove fly from favorites",
-        });
-  } catch (error) {
-    res.status(500).json({ status: 500, message: error });
-  } finally {
-    client.close();
-  }
-};
 // ** Add a review **
 const postReview = async (req, res) => {
+  console.log("postReview function called with request body:", req.body);
+
   // Extract the fly ID, review text, and author from the request
   const { _id } = req.params;
   const { reviewText, author } = req.body;
@@ -187,33 +199,33 @@ const postReview = async (req, res) => {
 
   try {
     await client.connect();
-
     const db = client.db("FlyGuide");
-    // Insert a new review document into the Reviews collection
-    const result = await db.collection("Reviews").insertOne({
+    const reviewId = uuidv4();
+    const newReview = {
+      _id: reviewId,
       flyId: _id,
       reviewText,
       author,
       date: currentDate,
-    });
-
-    console.log("inserting new review: ", result.ops[0]);
+    }
+    // Insert a new review document into the Reviews collection
+    const result = await db.collection("Reviews").insertOne(newReview);
 
     // Update the Fly document in the Flies collection to add the new review ID
     const flyResult = await db
       .collection("Flies")
       .updateOne(
         { _id: Number(_id) },
-        { $push: { reviews: result.ops[0]._id } }
+        { $push: { reviews: reviewId } }
       );
     console.log("fly updated: ", flyResult);
 
     // Update the User document in the Users collection to add the new review ID
     const userResult = await db
       .collection("Users")
-      .updateOne(
-        { email: author.email },
-        { $push: { reviews: result.ops[0]._id } }
+      .updateOne( 
+        { _id: author },
+        { $push: { reviews: reviewId } }
       );
     console.log("user updated: ", userResult);
 
@@ -228,37 +240,28 @@ const postReview = async (req, res) => {
 
 // ** Get all reviews by fly id **
 const getReviews = async (req, res) => {
+  const { _id } = req.params;
+  console.log(`Fetching reviews for fly with ID ${_id}`);
+
+
+  const client = new MongoClient(MONGO_URI, options);
+
   try {
-    // Connect to the MongoDB database
-    const client = new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("FlyGuide");
-
-    // Find the fly by _id
-    const flyId = req.params._id;
-    const fly = await db.collection("Flies").findOne({ _id: Number(flyId) });
-
-    // If the fly does not exist, return a 404 error
-    if (!fly) {
-      return res.status(404).json({ message: "Fly not found" });
-    }
-
-    // Get the reviews for the fly
-    const reviews = await db
-      .collection("Reviews")
-      .find({ flyId: Number(flyId) })
-      .toArray();
-
-    client.close();
-
-    // Return the reviews for the fly
-    res.status(200).json(reviews);
+    const reviewsCollection = db.collection("Reviews");
+    const reviews = await reviewsCollection.find({ flyId: String(_id) }).toArray();
+    console.log(`Found ${reviews.length} reviews for fly with ID ${_id}:`);
+    console.log(reviews);
+    res.status(200).json({ data: { reviews } });
   } catch (error) {
-    // If there was an error, return a 500 error
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Server error." });
+  } finally {
+    client.close();
   }
 };
+
 
 // Edit a review
 const updateReview = async (req, res) => {
@@ -279,12 +282,12 @@ const deleteReview = async (req, res) => {
 module.exports = {
   getFlies,
   getFly,
+  getUser,
   getUserFavorites,
   getUserReviews,
   getReviews,
   createUser,
-  addFavorite,
-  removeFavorite,
+  updateFavorites,
   postReview,
   updateReview,
   deleteReview,

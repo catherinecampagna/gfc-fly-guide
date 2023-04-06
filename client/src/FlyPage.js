@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
 import ReviewCard from "./components/ReviewCard";
 
-
 const FlyPage = () => {
   const { id } = useParams();
   const [fly, setFly] = useState(null);
@@ -26,45 +25,46 @@ const FlyPage = () => {
       {fly ? (
         <>
           <LeftContainer>
-             <TopLeftContainer>
-          <Sidebar />
-        </TopLeftContainer>
-        <Title>The {fly.flyName}</Title>
+            <TopLeftContainer>
+              <Sidebar />
+            </TopLeftContainer>
+            <Title>The {fly.flyName}</Title>
           </LeftContainer>
           <RightContainer>
             <Card>
-          <CardLeft> 
-            <FlyName>{fly.flyName}</FlyName>
-              <Type classname="fly-types">{fly.typeOfFly}</Type>
-            <Section>About this fly</Section>
-            <Description>{fly.description}</Description>
-            <BestFor>
-              <Section>Best for</Section>
-              <Row>
-                <Category>Species</Category>
-                <Answer>{fly.targetedFish.join(", ")}</Answer>
-              </Row>
-              <Row>
-                <Category>Water</Category>
-                <Answer>{fly.typeOfWater.join(", ")}</Answer>
-              </Row>
-              <Row>
-                <Category>Season</Category>
-                <Answer>{fly.seasonality.join(", ")}</Answer>
-              </Row>
-              <Row>
-                <Category>Region</Category>
-                <Answer>{fly.regionInCanada.join(", ")}</Answer>
-              </Row>
-            </BestFor>
-            </CardLeft>
-            <CardRight><Image src={`/images/flies/${fly._id}.png`} alt={fly.flyName} /></CardRight>
-          </Card>
-          <ReviewContainer>
-            <ReviewCard />
-              </ReviewContainer>
+              <CardLeft>
+                <FlyName>{fly.flyName}</FlyName>
+                <Type classname="fly-types">{fly.typeOfFly}</Type>
+                <Section>About this fly</Section>
+                <Description>{fly.description}</Description>
+                <BestFor>
+                  <Section>Best for</Section>
+                  <Row>
+                    <Category>Species</Category>
+                    <Answer>{fly.targetedFish.join(", ")}</Answer>
+                  </Row>
+                  <Row>
+                    <Category>Water</Category>
+                    <Answer>{fly.typeOfWater.join(", ")}</Answer>
+                  </Row>
+                  <Row>
+                    <Category>Season</Category>
+                    <Answer>{fly.seasonality.join(", ")}</Answer>
+                  </Row>
+                  <Row>
+                    <Category>Region</Category>
+                    <Answer>{fly.regionInCanada.join(", ")}</Answer>
+                  </Row>
+                </BestFor>
+              </CardLeft>
+              <CardRight>
+                <Image src={`/images/flies/${fly._id}.png`} alt={fly.flyName} />
+              </CardRight>
+            </Card>
+            <ReviewContainer>
+              <ReviewCard />
+            </ReviewContainer>
           </RightContainer>
-         
         </>
       ) : (
         <div>Loading...</div>
@@ -91,14 +91,13 @@ const LeftContainer = styled.div`
 `;
 
 const TopLeftContainer = styled.div`
-position: fixed;
+  position: fixed;
   top: 100px;
 `;
 
 const ReviewContainer = styled.div`
-margin-top: 50px;
-overflow: auto;
-
+  margin-top: 50px;
+  overflow: auto;
 `;
 
 const Title = styled.h1`
@@ -110,11 +109,11 @@ const Title = styled.h1`
 `;
 
 const Card = styled.div`
-overflow: scroll;
+  overflow: scroll;
   flex: 1;
-display: flex;
-border: 1px solid #ccc;
-  background-color: #C6D8CF;
+  display: flex;
+  border: 1px solid #ccc;
+  background-color: #c6d8cf;
   border-radius: 5px;
   padding: 16px;
   height: 550px;
@@ -148,7 +147,7 @@ const Category = styled.div`
 const Section = styled.h6`
   color: var(--color-text-secondary);
   padding-bottom: 10px;
-font-style: italic;
+  font-style: italic;
 `;
 
 const CardRight = styled.div`
@@ -192,6 +191,5 @@ const RightContainer = styled.div`
   background-color: var(--color-background-secondary);
   overflow: scroll;
 `;
-
 
 export default FlyPage;

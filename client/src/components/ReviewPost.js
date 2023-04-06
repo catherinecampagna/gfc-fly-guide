@@ -3,45 +3,50 @@ import styled from "styled-components";
 import { FiSend } from "react-icons/fi";
 import { UserContext } from "../UserContext";
 
-const ReviewPost = ({ flyId, refreshReviews }) => {
+const ReviewPost = ({ flyId, refresh, setRefresh }) => {
   const [reviewText, setReviewText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
+  
+  const { currentUser } = useContext(UserContext);
 
-
-  const { user } = useContext(UserContext);
-
+  // Form submission
   const handleSubmit = (event) => {
     event.preventDefault();
+    // Check if the review text is empty
+    if (reviewText.trim().length === 0) {
+      setError("Please enter a review.");
+      setStatus("error");
+      return;
+    }
     setIsLoading(true);
-  
+
     fetch(`/fly/${flyId}/reviews`, {
       method: "POST",
-      body: JSON.stringify({ reviewText, author: user.name }),
+      body: JSON.stringify({ reviewText, author: currentUser.name }),
       headers: {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === 400 || data.status === 500) {
-          throw new Error("error");
-        }
-        refreshReviews();
-        setReviewText("");
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setError("An error occurred while posting your review. Please try again.");
-        setStatus("error");
-      });
-  };
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.status === 400 || data.status === 500) {
+        throw new Error("error");
+      }
+      setRefresh(!refresh);
+      setReviewText("");
+      setIsLoading(false);
+    })
+    .catch((error) => {
+      console.log(error);
+      setStatus("error");
+    });
+};
 
   return (
     <>
-      {user && (
+      {currentUser && (
         <Wrapper>
           <Form onSubmit={handleSubmit}>
             <Textarea
@@ -55,7 +60,8 @@ const ReviewPost = ({ flyId, refreshReviews }) => {
           </Form>
         </Wrapper>
       )}
-      {status === "error" && <p>{error}</p>}
+      {status === "error" && <Error>{error}</Error>}
+      {status === "success" && <Success>Your review has been posted!</Success>}
     </>
   );
 };
@@ -102,6 +108,11 @@ const Button = styled.button`
   border: none;
   border-radius: 50px;
   padding: 10px 15px;
-  `;
+`;
+
+const Error = styled.p``;
+const Success = styled.p``;
+
+
 
 export default ReviewPost;

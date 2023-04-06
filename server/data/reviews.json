@@ -1,0 +1,255 @@
+[
+    {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a22" },
+        "flyId": "101",
+        "reviewText": "This fly was great for catching striped bass! Highly recommend.",
+        "author": "John Smith",
+        "date": {
+          "$date": { "$numberLong": "1659733991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a23" },
+        "flyId": "101",
+        "reviewText": "I used this fly on a recent fishing trip and it was very effective. Love the color combination!",
+        "author": "Amy Johnson",
+        "date": {
+          "$date": { "$numberLong": "1659833991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a24" },
+        "flyId": "102",
+        "reviewText": "This fly floats really well and looks just like a grasshopper. I caught several trout using it.",
+        "author": "Mark Thompson",
+        "date": {
+          "$date": { "$numberLong": "1666133991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a25" },
+        "flyId": "102",
+        "reviewText": "I love the realistic look of this fly. It's one of my go-to patterns for fly fishing.",
+        "author": "Sarah Lee",
+        "date": {
+          "$date": { "$numberLong": "1666733991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a26" },
+        "flyId": "103",
+        "reviewText": "The Wulff Bomber is a classic pattern that still works great today. I've had success using it on small streams.",
+        "author": "Ryan Chen",
+        "date": {
+          "$date": { "$numberLong": "1675533991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a27" },
+        "flyId": "103",
+        "reviewText": "This fly is easy to see on the water and attracts fish really well. A must-have for any fly angler.",
+        "author": "Grace Kim",
+        "date": {
+          "$date": { "$numberLong": "1677233991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a28" },
+        "flyId": "104",
+        "reviewText": "The Polar Shrimp is a killer pattern for steelhead and salmon. The pink and white colors are very effective.",
+        "author": "Jason Brown",
+        "date": {
+          "$date": { "$numberLong": "1680033991449" }
+        }
+      },
+
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a2a" },
+        "flyId": "105",
+        "reviewText": "The Muddler Minnow is a classic pattern that can be fished in a variety of ways. It's a great all-purpose pattern.",
+        "author": "Emma Jones",
+        "date": {
+          "$date": { "$numberLong": "1661633991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a2b" },
+        "flyId": "105",
+        "reviewText": "I've used this fly to catch trout, bass, and panfish. It's a great pattern for anyone starting out in fly fishing.",
+        "author": "Maximilian Weber",
+        "date": {
+          "$date": { "$numberLong": "1664633991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a2c" },
+        "flyId": "106",
+        "reviewText": "This fly is easy to see on the water and attracts fish really well.",
+        "author": "Catherine Campagna",
+        "date": {
+          "$date": { "$numberLong": "1677033991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a2d" },
+        "flyId": "106",
+        "reviewText": "The Yellow Zonker-Muddler is a great pattern for streamer fishing. It has a lot of movement in the water.",
+        "author": "Jesper Andersen",
+        "date": {
+          "$date": { "$numberLong": "1678433991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a2e" },
+        "flyId": "107",
+        "reviewText": "The Bone Minnow is a killer pattern for bass and pike. The bone color is very effective.",
+        "author": "Luisa Rossi",
+        "date": {
+          "$date": { "$numberLong": "1683033991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a2f" },
+        "flyId": "107",
+        "reviewText": "I've used this fly to catch bass in both lakes and rivers. The action is great and the fish love it.",
+        "author": "Oscar Müller",
+        "date": {
+          "$date": { "$numberLong": "1685533991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a30" },
+        "flyId": "108",
+        "reviewText": "The White Wulff is a classic pattern that can be very effective for trout. The white wings make it easy to see on the water.",
+        "author": "Lena Johansson",
+        "date": {
+          "$date": { "$numberLong": "1658233991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a32" },
+        "flyId": "108",
+        "reviewText": "I used this fly on a recent trip to Montana and caught several large trout. It's a great dry fly pattern.",
+        "author": "Sophie Dupont",
+        "date": {
+          "$date": { "$numberLong": "1661233991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a33" },
+        "flyId": "109",
+        "reviewText": "The Ghost Stonefly is a great pattern for spring fishing. It looks very realistic in the water.",
+        "author": "Niklas Andersson",
+        "date": {
+          "$date": { "$numberLong": "1665233991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a34" },
+        "flyId": "110",
+        "reviewText": "The Silver Rat is a classic Atlantic salmon pattern. It's a great fly for early season fishing.",
+        "author": "Thomas Müller",
+        "date": {
+          "$date": { "$numberLong": "1669333991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a35" },
+        "flyId": "111",
+        "reviewText": "The Green Butt Silver Hilton is a great pattern for summer steelhead. The green butt really stands out in the water.",
+        "author": "Oliver Schmidt",
+        "date": {
+          "$date": { "$numberLong": "1673933991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a36" },
+        "flyId": "112",
+        "reviewText": "The Green Butt Skunk is a classic steelhead pattern that still works great today. Highly recommend.",
+        "author": "Hanna Svensson",
+        "date": {
+          "$date": { "$numberLong": "1678533991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a37" },
+        "flyId": "113",
+        "reviewText": "The Thunder and Lightning is a classic salmon pattern that has caught fish for generations. It's a must-have for any fly box.",
+        "author": "William Johnson",
+        "date": {
+          "$date": { "$numberLong": "1683133991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a38" },
+        "flyId": "114",
+        "reviewText": "Ally's Shrimp is a great pattern for Atlantic salmon. The orange and black color combination is very effective.",
+        "author": "Andreas Schmitz",
+        "date": {
+          "$date": { "$numberLong": "1685833991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a3a" },
+        "flyId": "115",
+        "reviewText": "I've used the Blue Charm for years and it's still one of my favorite patterns for Atlantic salmon. Highly recommend.",
+        "author": "Maria Sanchez",
+        "date": {
+          "$date": { "$numberLong": "1659833991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a3b" },
+        "flyId": "116",
+        "reviewText": "The Tiger Ghost is a great pattern for striped bass. The orange and black color combination is very effective.",
+        "author": "Luca Rossi",
+        "date": {
+          "$date": { "$numberLong": "1664133991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a3c" },
+        "flyId": "117",
+        "reviewText": "The Woolly Bugger is a classic fly that can catch a variety of fish species. It's a must-have for any fly angler.",
+        "author": "Mateusz Nowak",
+        "date": {
+          "$date": { "$numberLong": "1668833991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a3d" },
+        "flyId": "118",
+        "reviewText": "The Intruder HG Chartreuse is a great pattern for winter steelhead. The bright chartreuse color really stands out in the water.",
+        "author": "Sophie Leroy",
+        "date": {
+          "$date": { "$numberLong": "1672333991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a3e" },
+        "flyId": "119",
+        "reviewText": "The Egg Sucking Leech is a great pattern for trout and steelhead. The bright egg pattern on the head is very effective.",
+        "author": "Nina Andersson",
+        "date": {
+          "$date": { "$numberLong": "1677433991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a3f" },
+        "flyId": "120",
+        "reviewText": "The Purple Intruder Leech is a great pattern for winter steelhead. The purple color is very effective in the water.",
+        "author": "Léa Martin",
+        "date": {
+          "$date": { "$numberLong": "1680733991449" }
+        }
+      },
+      {
+        "_id": { "$oid": "642e11ca1e0f2d5674146a40" },
+        "flyId": "121",
+        "reviewText": "The Kalama Special is a great pattern for summer steelhead. The orange and black color combination is very effective.",
+        "author": "Anton Karlsson",
+        "date": {
+          "$date": { "$numberLong": "1683933991449" }
+        }
+      }
+]

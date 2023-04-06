@@ -7,15 +7,26 @@ import Review from "./Review";
 const ReviewCard = () => {
   const { id } = useParams();
   const [fly, setFly] = useState(null);
+  const [refresh, setRefresh] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
 
   useEffect(() => {
-    fetch(`/fly/${id}`)
+    setIsLoading(true);
+    fetch(`/fly/${id}/reviews`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 400 || data.status === 500) {
           throw new Error("Error");
         }
         setFly(data.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError("An error occurred while loading reviews.");
+        setIsLoading(false);
       });
   }, [id]);
 

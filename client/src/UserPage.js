@@ -5,32 +5,32 @@ import { UserContext } from "./UserContext";
 import FlyCard from "./components/FlyCard";
 
 const UserPage = () => {
-  const { user } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const [favoriteFlies, setFavoriteFlies] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  // Fetch the user document
   useEffect(() => {
-    const fetchUserFavorites = async () => {
+    const fetchUser = async () => {
       try {
-        setLoading(true); // Set loading state to true
-        const response = await fetch(`/user/${user.email}/favoriteFlies`);
-        const data = await response.json();
-        const favoriteFliesWithId = data.favoriteFlies.map((fly) => ({
-          ...fly,
-          _id: fly.flyId,
-        }));
-        setFavoriteFlies(favoriteFliesWithId);
+    
+        const flyPromises = currentUser.favoriteFlies.map(async (id) => {
+          const res = await fetch(`/fly/${id}`);
+          const data = await res.json();
+          return data.data;
+        });
+        Promise.all(flyPromises).then((flies) => setFavoriteFlies(flies));
       } catch (error) {
         console.error(error);
       } finally {
-        setLoading(false); // Set loading state to false
+        setLoading(false);
       }
     };
 
-    if (user) {
-      fetchUserFavorites();
+    if (currentUser) {
+      setLoading(true);
+      fetchUser();
     }
-  }, [user]);
+  }, [currentUser]);
 
   return (
     <Container>
@@ -44,17 +44,23 @@ const UserPage = () => {
         <FavouriteSection>
           {loading ? (
             <p>Loading...</p>
-          ) : favoriteFlies && favoriteFlies.length > 0 ? (
-            <div>
-              <h2>Your favourite flies:</h2>
-              <ul>
-                {favoriteFlies.map((fly) => (
-                  <FlyCard key={fly._id} fly={fly} />
-                ))}
-              </ul>
-            </div>
           ) : (
-            <p>You have not added any flies to your favourites yet.</p>
+            <>
+              {currentUser.favoriteFlies.length && (
+                <div>
+                  <h2>Your favourite flies:</h2>
+                  <ul>
+                    {favoriteFlies.map((fly) => {
+                      return <FlyCard key={fly._id} fly={fly} />;
+                    })}
+                  </ul>
+                </div>
+              )}
+
+              {!currentUser.favoriteFlies.length && (
+                <p>You have not added any flies to your favourites yet.</p>
+              )}
+            </>
           )}
         </FavouriteSection>
       </RightContainer>

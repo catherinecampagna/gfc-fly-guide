@@ -8,7 +8,7 @@ const Review = ({ review }) => {
 
   return (
     <Wrapper>
-      {author && author.name && <Author>{author.name}</Author>}
+      <Author>{author}</Author>
       <Text>{reviewText}</Text>
       <Date>{formattedDate}</Date>
     </Wrapper>
@@ -20,14 +20,16 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 8px;
-  border-bottom: 1px solid black;
+  margin-left: 20px;
 `;
 
 const Author = styled.span`
+  color: grey;
   font-weight: bold;
 `;
 
 const Text = styled.p`
+  color: black;
   margin: 4px 0;
 `;
 

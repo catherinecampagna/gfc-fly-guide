@@ -4,41 +4,38 @@ import { FiHeart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { UserContext } from "../UserContext";
 
-
 const FlyCard = ({ fly }) => {
+  // State to track whether the fly is a favorite of the current user
+  const { currentUser } = useContext(UserContext);
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(true);
-  const { user: currentUser, updateUser: setCurrentUser } = useContext(UserContext);
 
   useEffect(() => {
+    // Check if the current user has marked the fly as a favorite
     if (currentUser) {
       setIsFavorite(currentUser.favoriteFlies.includes(fly._id));
     }
   }, [currentUser, fly._id]);
 
-
+  // Function to update the user's favorite flies
   const updateFavorites = async (flyId) => {
     try {
-      const res = await fetch(`/user/${currentUser.email}/favoriteFlies`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          flyId,
-        }),
-      });
-      const data = await res.json();
-      console.log("data sent:", JSON.stringify({
-        favoriteFlies: [...currentUser.favoriteFlies, flyId],
-      }));
-      console.log("response:", data);
-      setCurrentUser(data);
+        const res = await fetch(`/user/${currentUser.email}/favoriteFlies`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ flyId: flyId }),
+        });
+        const data = await res.json();
+        console.log("response:", data);
+    
     } catch (error) {
       console.error(error);
     }
   };
 
+  // Handle click event on the heart icon to mark or unmark the fly as a favorite
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
     if (currentUser) {
@@ -69,8 +66,8 @@ const FlyCard = ({ fly }) => {
               <Type>{fly.typeOfFly}</Type>
             </CardContent>
           </Link>
-          <HeartContainer onClick={handleFavoriteClick}>
-            <HeartIcon isfavorite={isFavorite} />
+          <HeartContainer onClick={handleFavoriteClick} isFavorite={isFavorite}>
+            <HeartIcon  />
           </HeartContainer>
         </>
       )}
@@ -127,10 +124,10 @@ const HeartContainer = styled.div`
   bottom: 8px;
   right: 8px;
   cursor: pointer;
+color: ${(props) => (props.isFavorite ? "red" : "gray")};
 `;
 
 const HeartIcon = styled(FiHeart)`
-  color: ${(props) => (props.isfavorite ? "red" : "gray")};
 `;
 
 export default FlyCard;

@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({
+  const [currentUser, setCurrentUser] = useState({
     email: null,
     name: null,
     favoriteFlies: [],
@@ -12,25 +12,24 @@ export const UserProvider = ({ children }) => {
     ratings: [],
   });
 
-  const { isAuthenticated, user: auth0User, isLoading } = useAuth0();
+  const { isAuthenticated, user, isLoading } = useAuth0();
 
   useEffect(() => {
     if (isAuthenticated) {
-      const { email, name } = auth0User;
-      setUser((prevUser) => ({ ...prevUser, email, name }));
+      fetch(`/user/${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setCurrentUser(data);
+        });
     }
-  }, [isAuthenticated, auth0User]);
-
-  const updateUser = (data) => {
-    setUser({ ...user, ...data });
-  };
+  }, [user]);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <UserContext.Provider value={{ user, updateUser }}>
+    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       {children}
     </UserContext.Provider>
   );

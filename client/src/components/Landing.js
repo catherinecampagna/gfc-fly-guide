@@ -43,7 +43,7 @@ const Landing = ({ onLogin }) => {
       createUser(user.email, user.name);
       onLogin();
     }
-  }, [isAuthenticated, onLogin, user]);
+  }, [ user]);
 
   return (
     <Container>
