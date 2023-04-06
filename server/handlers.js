@@ -238,6 +238,23 @@ const postReview = async (req, res) => {
   }
 };
 
+// ** Get all reviews **
+const getAllReviews = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+
+  try {
+    await client.connect();
+    const db = client.db('FlyGuide');
+    const reviews = await db.collection('Reviews').find().toArray();
+    res.status(200).json({ success: true, data: reviews });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: 'Server error' });
+  } finally {
+    await client.close();
+  }
+};
+
 // ** Get all reviews by fly id **
 const getReviews = async (req, res) => {
   const { _id } = req.params;
@@ -262,7 +279,6 @@ const getReviews = async (req, res) => {
   }
 };
 
-
 // Edit a review
 const updateReview = async (req, res) => {
   const { userId, flyId, rating, comment } = req.body;
@@ -283,6 +299,7 @@ module.exports = {
   getFlies,
   getFly,
   getUser,
+  getAllReviews,
   getUserFavorites,
   getUserReviews,
   getReviews,

@@ -85,29 +85,57 @@ const Container = styled.div`
 const LeftContainer = styled.div`
   flex: 1;
   padding: 20px;
+  margin-right: 50px;
+  width: 25vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;;
   justify-content: flex-end;
 `;
 
 const TopLeftContainer = styled.div`
   position: fixed;
   top: 100px;
+  margin-right: 50px;
+
+  @media only screen and (max-width: 768px) { /* for small screens */
+    font-size: 16px;
+  }
+  
+  @media only screen and (min-width: 768px) and (max-width: 1024px) { /* for medium screens */
+    font-size: 16px;
+  }
+  
+  @media only screen and (min-width: 1024px) { /* for large screens */
+    font-size: 20px;
+  }
+
+`;
+
+const Title = styled.h1`;
+  font-family: var(--font-family-heading);
+  color: #013926;
+  position: fixed;
+  bottom: 100px;
+  width: 25vw;
+  margin-right: 50px;
+
+  @media only screen and (max-width: 768px) { /* for small screens */
+    font-size: 40px;
+  }
+  
+  @media only screen and (min-width: 800px) and (max-width: 1024px) { /* for medium screens */
+    font-size: 50px;
+  }
+  
+  @media only screen and (min-width: 1024px) { /* for large screens */
+    font-size: 70px;
+  }
 `;
 
 const ReviewContainer = styled.div`
   margin-top: 50px;
   overflow: auto;
-`;
-
-const Title = styled.h1`
-  width: 20%;
-  font-family: var(--font-family-heading);
-  color: #013926;
-  position: fixed;
-  bottom: 100px;
-`;
-
+  `;
 const Card = styled.div`
   overflow: scroll;
   flex: 1;

@@ -47,40 +47,51 @@ const Container = styled.div`
 `;
 
 const LeftContainer = styled.div`
-  display: flex;
-  flex-direction: column;
   flex: 1;
-`;
-const TopLeftContainer = styled.div`
-position: fixed;
-  top: 100px;
-`;
-
-const BackLink = styled.a`
+  padding: 20px;
+  margin-right: 50px;
+  width: 25vw;
   display: flex;
-  align-items: center;
-  color: #013926;
-  margin-bottom: 16px;
-  text-decoration: none;
+  flex-direction: column;;
+  justify-content: flex-end;
 `;
 
-const HiButton = styled.button`
-  margin-top: auto;
-  padding: 12px 16px;
-  background-color: #013926;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
+const TopLeftContainer = styled.div`
+  position: fixed;
+  top: 100px;
+  margin-right: 50px;
+  
+  @media only screen and (max-width: 768px) { /* for small screens */
   font-size: 16px;
-  cursor: pointer;
-`;
+}
 
-const Title = styled.h1`
-  width: 20%;
+@media only screen and (min-width: 768px) and (max-width: 1024px) { /* for medium screens */
+font-size: 16px;
+}
+
+@media only screen and (min-width: 1024px) { /* for large screens */
+font-size: 20px;
+}
+`;
+const Title = styled.h1`;
   font-family: var(--font-family-heading);
   color: #013926;
   position: fixed;
   bottom: 100px;
+  width: 25vw;
+  margin-right: 50px;
+
+  @media only screen and (max-width: 768px) { /* for small screens */
+    font-size: 40px;
+  }
+  
+  @media only screen and (min-width: 800px) and (max-width: 1024px) { /* for medium screens */
+    font-size: 50px;
+  }
+  
+  @media only screen and (min-width: 1024px) { /* for large screens */
+    font-size: 70px;
+  }
 `;
 
 const RightContainer = styled.div`

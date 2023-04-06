@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-const reviews = require("./data/reviews.json");
+const flies = require("./data/flies.json");
 
 require("dotenv").config();
 const { MONGO_URI } = process.env;
@@ -19,7 +19,9 @@ const batchImport = async () => {
   const db = client.db(dbName);
   console.log("connected!");
 
-  await db.collection("Reviews").insertMany(reviews);
+  await db.collection("Flies").insertMany(flies);
+  await db.createCollection("Users");
+  await db.createCollection("Reviews");
   client.close();
       console.log("disconnected!");
 
