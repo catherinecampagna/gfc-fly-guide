@@ -11,7 +11,6 @@ const ReviewCard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-
   useEffect(() => {
     setIsLoading(true);
     fetch(`/fly/${id}/reviews`)
@@ -35,13 +34,18 @@ const ReviewCard = () => {
       {fly ? (
         <>
           {fly.reviews.length > 0 ? (
-                fly.reviews.map((review) => (
-                  <Review key={review._id} review={review} />
-                ))
-              ) : (
-                <div>No reviews yet for this fly.</div>
-              )}
-          <ReviewPost flyId={id} />
+            fly.reviews.map((review) => (
+              <Review key={review._id} review={review} />
+            ))
+          ) : (
+            <div>No reviews yet for this fly.</div>
+          )}
+          <ReviewPost
+            flyId={id}
+            refresh={refresh}
+            setRefresh={setRefresh}
+            onReviewAdded={setFly}
+          />
         </>
       ) : (
         <div>Loading...</div>

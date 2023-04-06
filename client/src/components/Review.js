@@ -2,7 +2,7 @@ import styled from "styled-components";
 import moment from 'moment';
 
 const Review = ({ review }) => {
-  const { author, reviewText, date, flyId } = review;
+  const { author, reviewText, date } = review;
 
   const formattedDate = moment(date).format('YYYY-MM-DD');
 
@@ -11,7 +11,6 @@ const Review = ({ review }) => {
       <Author>{author}</Author>
       <Date>{formattedDate}</Date>
       <Text>{reviewText}</Text>
-      {/* <Fly>{flyId}</Fly> */}
     </Wrapper>
   );
 };
@@ -34,11 +33,6 @@ const Text = styled.p`
 `;
 
 const Date = styled.span`
-  font-size: 12px;
-  color: grey;
-`;
-
-const Fly = styled.span`
   font-size: 12px;
   color: grey;
 `;

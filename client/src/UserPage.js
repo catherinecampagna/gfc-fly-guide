@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
 import { UserContext } from "./UserContext";
 import FlyCard from "./components/FlyCard";
-import Review from "./components/Review";
+import UserReview from "./components/UserReview";
 
 const UserPage = () => {
   const { currentUser } = useContext(UserContext);
@@ -22,14 +22,11 @@ const UserPage = () => {
         });
         Promise.all(flyPromises).then((flies) => setFavoriteFlies(flies));
 
-        const reviewRes = await fetch("/reviews");
+        const reviewRes = await fetch(`/user/${currentUser.email}/reviews`);
         const reviewData = await reviewRes.json();
-        console.log(reviewData);
+        console.log("reviewData", reviewData);
 
-        const userReviews = reviewData.data.filter(
-          (review) => review.author === currentUser.name
-        );
-        setReviews(userReviews);
+        setReviews(reviewData.data);
       } catch (error) {
         console.error(error);
       } finally {
@@ -79,9 +76,7 @@ const UserPage = () => {
               {reviews.length && (
                 <ReviewSection>
                   <h3>Your reviews</h3>
-                  {reviews.map((review) => {
-                    return <Review key={review._id} review={review} />;
-                  })}
+                  <UserReview />
                 </ReviewSection>
               )}
 

@@ -85,20 +85,33 @@ const getUserFavorites = async (req, res) => {
 
 // ** Get a user's reviews **
 const getUserReviews = async (req, res) => {
-  const { email } = req.params;
+  const { _id } = req.params;
   const client = new MongoClient(MONGO_URI, options);
 
   try {
     await client.connect();
     const db = client.db("FlyGuide");
-    const user = await db.collection("Users").findOne({ email });
+    const user = await db.collection("Users").findOne({ _id });
 
     if (!user) {
+      console.log(`User with _id ${_id} not found`);
       return res.status(404).json({ message: "User not found" });
     }
 
-    const reviews = user.reviews;
-    return res.status(200).json({ reviews });
+    const reviewIds = user.reviews;
+    const reviewCollection = db.collection("Reviews");
+    const reviews = await reviewCollection.find({ _id: { $in: reviewIds } }).toArray();
+
+    const flyCollection = db.collection("Flies");
+    const reviewsWithFlyNames = await Promise.all(
+      reviews.map(async (review) => {
+        const flyId = parseInt(review.flyId, 10);
+        const fly = await flyCollection.findOne({ _id: flyId });
+                return { ...review, flyName: fly };
+      })
+    );
+
+    return res.status(200).json({ data: reviewsWithFlyNames });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -224,7 +237,7 @@ const postReview = async (req, res) => {
     const userResult = await db
       .collection("Users")
       .updateOne( 
-        { _id: author },
+        { _id: req.body.email },
         { $push: { reviews: reviewId } }
       );
     console.log("user updated: ", userResult);

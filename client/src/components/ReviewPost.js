@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FiSend } from "react-icons/fi";
 import { UserContext } from "../UserContext";
 
-const ReviewPost = ({ flyId, refresh, setRefresh }) => {
+const ReviewPost = ({ flyId, refresh, setRefresh, onReviewAdded }) => {
   const [reviewText, setReviewText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState("idle");
@@ -24,7 +24,7 @@ const ReviewPost = ({ flyId, refresh, setRefresh }) => {
 
     fetch(`/fly/${flyId}/reviews`, {
       method: "POST",
-      body: JSON.stringify({ reviewText, author: currentUser.name }),
+      body: JSON.stringify({ reviewText, author: currentUser.name, email: currentUser.email }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -37,6 +37,7 @@ const ReviewPost = ({ flyId, refresh, setRefresh }) => {
       setRefresh(!refresh);
       setReviewText("");
       setIsLoading(false);
+      onReviewAdded(data.data);
     })
     .catch((error) => {
       console.log(error);

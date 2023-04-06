@@ -24,7 +24,6 @@ express()
 .get("/flies", getFlies) // endpoint to get all flies
 .get("/fly/:_id", getFly) // endpoint to get a specific fly by id
 .get("/user/:_id", getUser) // endpoint to get user info
-
 .get("/user/:_id/favoriteFlies", getUserFavorites) // endpoint to get user's favorite flies
 .get("/reviews", getAllReviews)
 .get("/user/:_id/reviews", getUserReviews) // endpoint to get user's reviews
