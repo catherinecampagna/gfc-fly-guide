@@ -15,7 +15,6 @@ const LoginButton = () => {
 };
 
 const createUser = async (email, name) => {
-  console.log("createUser called with", email, name);
 
   const response = await fetch("/user/:_id", {
     method: "POST",
@@ -28,7 +27,6 @@ const createUser = async (email, name) => {
     }),
   });
   const data = await response.json();
-  console.log("createUser response", data);
 
   return data;
 };
@@ -38,12 +36,10 @@ const Landing = ({ onLogin }) => {
 
   useEffect(() => {
     if (isAuthenticated && user.email && user.name) {
-      console.log("email:", user.email);
-      console.log("name:", user.name);
       createUser(user.email, user.name);
       onLogin();
     }
-  }, [ user]);
+  }, [user]);
 
   return (
     <Container>
@@ -79,21 +75,21 @@ const Landing = ({ onLogin }) => {
                   Go to your Fly Box
                 </Button>
               </ButtonContainer>
-                <LogoutLink
-                  href="#"
-                  onClick={() => logout({ returnTo: window.location.origin })}
-                >
-                  Log Out
-                </LogoutLink>
+              <LogoutLink
+                href="#"
+                onClick={() => logout({ returnTo: window.location.origin })}
+              >
+                Log Out
+              </LogoutLink>
             </LoginCard>
           </>
         ) : (
           <PreLoginCard>
+            <CardPreTitle> Log in to discover:</CardPreTitle>
             <DescriptionDark>
-              Log in to discover:
               <br></br>- Personalized fly recommendations
               <br></br>- Browse our top flies
-              <br></br>- Review and keep tabs of you favourites
+              <br></br>- Review and save your favourites
             </DescriptionDark>
             <LoginButton />
           </PreLoginCard>
@@ -113,14 +109,18 @@ const Container = styled.section`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 800px) {
     flex-direction: column;
+    height: 150vh;
   }
 `;
 
 const LeftContainer = styled.div`
   flex: 1;
   margin: 100px;
+  @media screen and (max-width: 800px) {
+    margin-bottom: 0px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -141,7 +141,9 @@ const LogoutLink = styled.a`
 const Logo = styled.img`
   width: 100%;
   max-width: 1000px;
-  height: auto;
+  @media screen and (max-width: 800px) {
+    width: 500px;
+  }
 `;
 
 const RightContainer = styled.div`
@@ -151,7 +153,12 @@ const RightContainer = styled.div`
   align-items: center;
   color: #f5fffa;
   margin: 100px;
+  @media screen and (max-width: 800px) {
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
 `;
+
 const Text = styled.div`
   display: flex;
   flex-direction: column;
@@ -160,7 +167,7 @@ const Text = styled.div`
 `;
 
 const Title = styled.p`
-  font-size: 36px;
+  font-size: 40px;
   font-style: italic;
   margin-bottom: 12px;
 `;
@@ -168,7 +175,7 @@ const Title = styled.p`
 const CardTitle = styled.p`
   font-size: 36px;
   font-style: italic;
-  color: #013926 ;
+  color: #013926;
 `;
 
 const Description = styled.p`
@@ -184,16 +191,26 @@ const PreLoginCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 400px;
-  height: 225px;
+  height: auto;
+`;
+
+const CardPreTitle = styled.p`
+  font-size: 36px;
+  font-style: italic;
+  color: #013926;
+  margin-bottom: 0;
+  padding-bottom: 0;
 `;
 
 const DescriptionDark = styled.p`
   color: #013926;
-  font-size: 14px;
-  margin-bottom: 32px;
+  font-size: 16px;
   text-align: center;
-  font-family: var(--font-family-other);
+  font-family: var(--font-family-body);
+  margin-top: 0;
+  padding-top: 0;
 `;
 const LoginCard = styled.div`
   background-color: #c6d8cf;
@@ -211,12 +228,11 @@ const LoginCard = styled.div`
 const ScrollButton = styled(Link)`
   margin-top: 4px;
   margin-bottom: 4px;
-font-size: 16px;
-padding: 15px;
-width: 230px;
+  font-size: 16px;
+  padding: 15px;
+  width: 230px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -224,14 +240,13 @@ width: 230px;
 `;
 
 const Button = styled.a`
-  margin-top: 4px;
+  margin-top: 15px;
   margin-bottom: 4px;
-font-size: 16px;
-padding: 15px;
-width: 230px;
+  font-size: 16px;
+  padding: 15px;
+  width: 230px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
