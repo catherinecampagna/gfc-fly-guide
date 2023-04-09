@@ -40,6 +40,7 @@ const Landing = ({ onLogin }) => {
       onLogin();
     }
   }, [user]);
+  ;
 
   return (
     <Container>
@@ -111,16 +112,12 @@ const Container = styled.section`
   align-items: center;
   @media screen and (max-width: 800px) {
     flex-direction: column;
-    height: 150vh;
   }
 `;
 
 const LeftContainer = styled.div`
   flex: 1;
   margin: 100px;
-  @media screen and (max-width: 800px) {
-    margin-bottom: 0px;
-  }
 `;
 
 const ButtonContainer = styled.div`
@@ -141,9 +138,7 @@ const LogoutLink = styled.a`
 const Logo = styled.img`
   width: 100%;
   max-width: 1000px;
-  @media screen and (max-width: 800px) {
-    width: 500px;
-  }
+  height: auto;
 `;
 
 const RightContainer = styled.div`
@@ -153,10 +148,6 @@ const RightContainer = styled.div`
   align-items: center;
   color: #f5fffa;
   margin: 100px;
-  @media screen and (max-width: 800px) {
-    margin-bottom: 0px;
-    margin-top: 0px;
-  }
 `;
 
 const Text = styled.div`
