@@ -108,11 +108,15 @@ const Textarea = styled.textarea`
 `;
 
 const Button = styled.button`
-  background-color: black;
+  background-color: var(--color-text-secondary);
   color: white;
   border: none;
-  border-radius: 50px;
-  padding: 10px 15px;
+  border-radius: 4px;
+  padding: 8px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const Error = styled.p``;

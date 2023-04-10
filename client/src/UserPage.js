@@ -183,12 +183,11 @@ const FlyGrid = styled.div`
 `;
 
 const ReviewSection = styled.div`
+  margin-top: 20px;
   font-family: var(--font-family-heading);
   color: #013926;
   display: flex;
   flex-direction: column;
 `;
-
-const ReviewCard = styled.div``;
 
 export default UserPage;

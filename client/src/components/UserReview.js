@@ -75,7 +75,7 @@ const UserReview = () => {
           <FlyName href={`/fly/${review.flyName._id}`}>
             {review.flyName ? review.flyName.flyName : "Unknown fly"}
           </FlyName>
-          <Date>{moment(review.date).format("YYYY-MM-DD")}</Date>
+          <Date>Posted on{moment(review.date).format(" DD-MM-YYYY")}</Date>
           {editingReviewId === review._id ? (
             <EditWrapper>
               <EditInput
@@ -100,9 +100,9 @@ const UserReview = () => {
                 Edit
               </Button>
             )}
-            <Button onClick={() => handleDeleteReview(review._id)}>
+            <DeleteButton onClick={() => handleDeleteReview(review._id)}>
               Delete
-            </Button>
+            </DeleteButton>
           </ButtonWrapper>
         </Wrapper>
       ))}
@@ -124,38 +124,55 @@ const FlyName = styled.a`
   margin-bottom: 2px;
   color: var(--color-text-secondary);
   text-decoration: underline;
-  font-size: 20px;
+  font-size: 18px;
   font-family: var(--font-family-body);
   font-weight: var(--font-weight-bold);
   cursor: pointer;
 `;
 
 const Text = styled.p`
-  color: black;
+  font-size: 16px;
   margin: 4px 0;
+  font-family: var(--font-family-body);
+  color: var(--color-text-secondary);
 `;
 
 const Date = styled.span`
   font-size: 12px;
-  color: grey;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-top: 8px;
 `;
 
 const Button = styled.button`
+  margin: 4px 4px;
   background-color: #013926;
   color: white;
   border: none;
   border-radius: 4px;
   padding: 4px 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 11px;
   &:hover {
     opacity: 0.8;
+  }
+`;
+
+const DeleteButton = styled.button`
+  margin: 4px 4px;
+  background-color: transparent;
+  border: 1px #013926 solid;
+  color: #013926;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 11px;
+  &:hover {
+    border: 1px red solid;
+    color: red;
   }
 `;
 
@@ -165,19 +182,21 @@ const EditWrapper = styled.div`
 `;
 
 const EditInput = styled.textarea`
-  height: 50px;
-  resize: none;
+  height: 100px;
 `;
 
 const EditButton = styled(Button)`
-  margin-top: 8px;
+  margin-top: 10px;
 `;
 
 const CancelButton = styled(Button)`
-  background-color: #ccc;
+  margin-top: 4px;
+  background-color: transparent;
+  border: 1px #013926 solid;
+  color: #013926;
   &:hover {
-    background-color: #ccc;
-    opacity: 0.8;
+    border: 1px #013926 solid;
+    color: #013926;
   }
 `;
 

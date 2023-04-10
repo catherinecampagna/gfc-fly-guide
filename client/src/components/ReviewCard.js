@@ -76,6 +76,7 @@ const Wrapper = styled.div`
   background-color: #c6d8cf;
   border-radius: 5px;
   padding: 20px 40px;
+  margin-bottom: 100px;
 `;
 
 const CardTitle = styled.h6`
