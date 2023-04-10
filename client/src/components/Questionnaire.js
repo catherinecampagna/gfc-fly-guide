@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import FlyCard from "./FlyCard";
+import { FiSend } from "react-icons/fi";
 
 const Questionnaire = () => {
   const [region, setRegion] = useState("");
@@ -42,9 +43,7 @@ const Questionnaire = () => {
 
     setSubmitEnabled(true);
     setRecommendations(randomMatches);
-
   };
-  
 
   const isFormComplete = region && season && species && water;
 
@@ -135,7 +134,13 @@ const Questionnaire = () => {
           disabled={!isFormComplete || submitEnabled}
           onClick={handleSubmit}
         >
-          {submitEnabled ? "Recommendations submitted" : "Submit"}
+          {submitEnabled ? (
+            "Tight Lines!"
+          ) : (
+            <>
+              Submit <FiSend /> 
+            </>
+          )}
         </SubmitButton>
       </RightContainer>
       <LowerLeftContainer></LowerLeftContainer>
@@ -157,14 +162,14 @@ const LeftContainer = styled.div`
   flex-direction: column;
   flex: 2;
   margin-right: 50px;
-  `;
+`;
 
-  const FlycardsContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    margin-top: 16px;
-  `;
+const FlycardsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-top: 16px;
+`;
 
 const RightContainer = styled.div`
   flex: 2;
@@ -219,7 +224,7 @@ const SubmitButton = styled.button`
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   margin-top: auto;
   margin-bottom: 16px;
+  text-align: center;
 `;
-
 
 export default Questionnaire;

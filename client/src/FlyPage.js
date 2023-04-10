@@ -271,6 +271,7 @@ const HeartContainer = styled.div`
 display: flex;
 flex-direction: row;
 margin-top: 10px;
+font-size: 16px;
   cursor: pointer;
 color: ${(props) => (props.isFavorite ? "red" : "gray")};
 `;

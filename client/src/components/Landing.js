@@ -15,7 +15,6 @@ const LoginButton = () => {
 };
 
 const createUser = async (email, name) => {
-
   const response = await fetch("/user/:_id", {
     method: "POST",
     headers: {
@@ -40,8 +39,6 @@ const Landing = ({ onLogin }) => {
       onLogin();
     }
   }, [user]);
-  ;
-
   return (
     <Container>
       <LeftContainer>
@@ -67,7 +64,7 @@ const Landing = ({ onLogin }) => {
                   smooth={true}
                   duration={500}
                 >
-                  Find the perfect fly
+                  Take our quiz &<br></br> Find the perfect fly{" "}
                 </ScrollButton>
                 <Button className="button1" href="/topflies">
                   Browse our Top Flies
@@ -89,7 +86,7 @@ const Landing = ({ onLogin }) => {
             <CardPreTitle> Log in to discover:</CardPreTitle>
             <DescriptionDark>
               <br></br>- Personalized fly recommendations
-              <br></br>- Browse our top flies
+              <br></br>- Our Top Flies
               <br></br>- Review and save your favourites
             </DescriptionDark>
             <LoginButton />
@@ -217,31 +214,10 @@ const LoginCard = styled.div`
 `;
 
 const ScrollButton = styled(Link)`
-  margin-top: 4px;
-  margin-bottom: 4px;
-  font-size: 16px;
-  padding: 15px;
-  width: 230px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  }
 `;
 
 const Button = styled.a`
-  margin-top: 15px;
-  margin-bottom: 4px;
-  font-size: 16px;
-  padding: 15px;
-  width: 230px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  }
+ 
 `;
 
 export default Landing;

@@ -183,6 +183,10 @@ const EditWrapper = styled.div`
 
 const EditInput = styled.textarea`
   height: 100px;
+  font-family: var(--font-family-body);
+  font-size: 16px;
+  font-weight: 200;
+  padding: 10px;
 `;
 
 const EditButton = styled(Button)`

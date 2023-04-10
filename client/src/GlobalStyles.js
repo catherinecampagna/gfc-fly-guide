@@ -93,16 +93,22 @@ const GlobalStyles = createGlobalStyle`
 
   /* Buttons */
   .button1 {
-    background-color: #f5fffa;
-    color: #013926;
-    border-radius: 5px;
-    padding: 20px 32px;
-    font-size: 18px;
-    width: 170px;
-    text-align: center;
-    font-family: var(--font-family-body);
-    font-weight: 300;
-    border: none;
+  text-align: center;
+  font-weight: 500;
+  border: 1px #013926 solid;
+  background-color: #f5fffa;
+  color: #013926;
+  border-radius: 5px;
+  margin-top: 15px;
+  margin-bottom: 4px;
+  font-size: 16px;
+  padding: 20px 40px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
 
   }
 
