@@ -11,6 +11,7 @@ const ReviewCard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Fetch reviews
   useEffect(() => {
     setIsLoading(true);
     fetch(`/fly/${id}/reviews`)
@@ -27,42 +28,61 @@ const ReviewCard = () => {
         setError("An error occurred while loading reviews.");
         setIsLoading(false);
       });
-  }, [id]);
+  }, [id, refresh]);
+
+  // Handle new Review
+  const handleReviewAdded = (newFlyData) => {
+    setFly(newFlyData);
+    setRefresh(!refresh);
+  };
 
   return (
     <Wrapper>
-      {fly ? (
-        <>
-          {fly.reviews.length > 0 ? (
-            fly.reviews.map((review) => (
-              <Review key={review._id} review={review} />
-            ))
-          ) : (
-            <div>No reviews yet for this fly.</div>
-          )}
-          <ReviewPost
-            flyId={id}
-            refresh={refresh}
-            setRefresh={setRefresh}
-            onReviewAdded={setFly}
-          />
-        </>
-      ) : (
+      <CardTitle>Reviews</CardTitle>
+      {isLoading ? (
         <div>Loading...</div>
+      ) : (
+        <>
+          {error ? (
+            <div>{error}</div>
+          ) : (
+            <>
+              {fly && fly.reviews.length > 0 ? (
+                fly.reviews.map((review) => (
+                  <Review key={review._id} review={review} />
+                ))
+              ) : (
+                <div>No reviews yet for this fly.</div>
+              )}
+              <ReviewPost
+                flyId={id}
+                refresh={refresh}
+                setRefresh={setRefresh}
+                onReviewAdded={handleReviewAdded}
+              />
+            </>
+          )}
+        </>
       )}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  overflow: scroll;
   flex: 1;
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;
   background-color: #c6d8cf;
   border-radius: 5px;
-  padding: 16px;
+  padding: 20px 40px;
+`;
+
+const CardTitle = styled.h6`
+  color: var(--color-text-secondary);
+  font-style: italic;
+  padding: 20px 30px 16px;
+  border-bottom: 1px #013926 solid;
 `;
 
 export default ReviewCard;

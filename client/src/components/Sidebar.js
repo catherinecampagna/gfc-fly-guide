@@ -10,8 +10,9 @@ const Sidebar = () => {
 
   return (
     <Container>
-      <NavLink to="/flybox">Hi, {user.name}</NavLink>
+      <MainNavLink to="/flybox">Hi, {user.name}</MainNavLink>
       <NavLink to="/">Home</NavLink>
+      <NavLink to="/flybox">Your Fly Box</NavLink>
       <NavLink to="/topflies">Top Flies</NavLink>
     </Container>
   );
@@ -23,6 +24,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const MainNavLink = styled(Link)`
+  color: #013926;
+  text-decoration: none;
+  margin-bottom: 15px;
+`;
+
 
 const NavLink = styled(Link)`
   color: #013926;

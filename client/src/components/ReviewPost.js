@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { FiSend } from "react-icons/fi";
 import { UserContext } from "../UserContext";
 
-const ReviewPost = ({ flyId, refresh, setRefresh, onReviewAdded }) => {
+const ReviewPost = ({ flyId, onReviewAdded }) => {
   const [reviewText, setReviewText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
-  
+
   const { currentUser } = useContext(UserContext);
 
   // Form submission
@@ -24,26 +24,30 @@ const ReviewPost = ({ flyId, refresh, setRefresh, onReviewAdded }) => {
 
     fetch(`/fly/${flyId}/reviews`, {
       method: "POST",
-      body: JSON.stringify({ reviewText, author: currentUser.name, email: currentUser.email }),
+      body: JSON.stringify({
+        reviewText,
+        author: currentUser.name,
+        email: currentUser.email,
+      }),
       headers: {
         "Content-Type": "application/json",
       },
     })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.status === 400 || data.status === 500) {
-        throw new Error("error");
-      }
-      setRefresh(!refresh);
-      setReviewText("");
-      setIsLoading(false);
-      onReviewAdded(data.data);
-    })
-    .catch((error) => {
-      console.log(error);
-      setStatus("error");
-    });
-};
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 400 || data.status === 500) {
+          throw new Error("error");
+        }
+        setReviewText("");
+        setIsLoading(false);
+        setStatus("success");
+        onReviewAdded(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setStatus("error");
+      });
+  };
 
   return (
     <>
@@ -113,7 +117,5 @@ const Button = styled.button`
 
 const Error = styled.p``;
 const Success = styled.p``;
-
-
 
 export default ReviewPost;

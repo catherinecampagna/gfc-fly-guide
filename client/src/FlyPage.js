@@ -111,7 +111,7 @@ const TopLeftContainer = styled.div`
 
 `;
 
-const Title = styled.h1`;
+const Title = styled.h1`
   font-family: var(--font-family-heading);
   color: #013926;
   position: fixed;
@@ -134,22 +134,22 @@ const Title = styled.h1`;
 
 const ReviewContainer = styled.div`
   margin-top: 50px;
-  overflow: auto;
+  height: auto;
+
   `;
+
 const Card = styled.div`
-  overflow: scroll;
   flex: 1;
   display: flex;
   border: 1px solid #ccc;
   background-color: #c6d8cf;
   border-radius: 5px;
   padding: 16px;
-  height: 550px;
+  height: auto;
 `;
 
 const CardLeft = styled.div`
   flex: 1;
-
   padding: 20px 50px;
   display: flex;
   flex-direction: column;
@@ -180,7 +180,6 @@ const Section = styled.h6`
 
 const CardRight = styled.div`
   flex: 1;
-
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -205,6 +204,14 @@ const Answer = styled.p`
 `;
 const Image = styled.img`
   width: 450px;
+
+  @media only screen and (max-width: 768px) { /* for small screens */
+  width: 250px;
+  }
+  
+  @media only screen and (min-width: 768px) and (max-width: 1024px) { /* for medium screens */
+  width: 250px;
+  }
 `;
 
 const Description = styled.p`
@@ -217,7 +224,7 @@ const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: var(--color-background-secondary);
-  overflow: scroll;
+  height: auto;
 `;
 
 export default FlyPage;

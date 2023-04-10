@@ -8,7 +8,7 @@ import UserReview from "./components/UserReview";
 const UserPage = () => {
   const { currentUser } = useContext(UserContext);
   const [favoriteFlies, setFavoriteFlies] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingUser, setLoadingUser] = useState(true);
   const [reviews, setReviews] = useState([]);
 
   // Fetch the user document
@@ -30,12 +30,12 @@ const UserPage = () => {
       } catch (error) {
         console.error(error);
       } finally {
-        setLoading(false);
+        setLoadingUser(false);
       }
     };
 
     if (currentUser) {
-      setLoading(true);
+      setLoadingUser(true);
       fetchUser();
     }
   }, [currentUser]);
@@ -50,37 +50,31 @@ const UserPage = () => {
       </LeftContainer>
       <RightContainer>
         <FavouriteSection>
-          {loading ? (
+          {loadingUser ? (
             <p>Loading...</p>
           ) : (
             <>
-              {currentUser.favoriteFlies.length && (
+              {favoriteFlies?.length ? (
                 <FlySection>
-                  <h3>Your favourite flies</h3>
+                  <Section>Your favourite flies</Section>
                   <FlyGrid>
                     {favoriteFlies.map((fly) => {
                       return <FlyCard key={fly._id} fly={fly} />;
                     })}
                   </FlyGrid>
                 </FlySection>
-              )}
-
-              {!currentUser.favoriteFlies.length && (
+              ) : (
                 <p>You have not added any flies to your favourites yet.</p>
               )}
 
-              {!currentUser.favoriteFlies.length && (
-                <p>You have not added any flies to your favourites yet.</p>
-              )}
-
-              {reviews.length && (
+              {reviews?.length ? (
                 <ReviewSection>
-                  <h3>Your reviews</h3>
+                  <Section>Your reviews</Section>
                   <UserReview />
                 </ReviewSection>
+              ) : (
+                <p>You have not written any reviews yet.</p>
               )}
-
-              {!reviews.length && <p>You have not written any reviews yet.</p>}
             </>
           )}
         </FavouriteSection>
@@ -106,6 +100,13 @@ const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+`;
+
+const Section = styled.h4`
+  color: var(--color-text-secondary);
+  padding-bottom: 10px;
+  font-style: italic;
+  border-bottom: 1px #013926 solid;
 `;
 
 const TopLeftContainer = styled.div`
