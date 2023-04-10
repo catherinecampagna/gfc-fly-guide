@@ -72,9 +72,9 @@ const UserReview = () => {
     <>
       {reviews.map((review) => (
         <Wrapper key={review._id}>
-          {/* <FlyName href={`/fly/${review.flyName._id}`}>
+          <FlyName href={`/fly/${review.flyName._id}`}>
             {review.flyName ? review.flyName.flyName : "Unknown fly"}
-          </FlyName> */}
+          </FlyName>
           <Date>{moment(review.date).format("YYYY-MM-DD")}</Date>
           {editingReviewId === review._id ? (
             <EditWrapper>
