@@ -213,11 +213,8 @@ const LoginCard = styled.div`
   height: auto;
 `;
 
-const ScrollButton = styled(Link)`
-`;
+const ScrollButton = styled(Link)``;
 
-const Button = styled.a`
- 
-`;
+const Button = styled.a``;
 
 export default Landing;
