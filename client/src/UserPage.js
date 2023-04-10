@@ -84,7 +84,7 @@ const UserPage = () => {
 };
 
 const Container = styled.div`
-  height: 100vh;
+  height: auto;
   background-color: #f5fffa;
   display: flex;
   flex-direction: row;

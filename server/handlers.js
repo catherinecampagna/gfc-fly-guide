@@ -2,7 +2,7 @@
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 const { MongoClient } = require("mongodb");
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 
 const options = {
   useNewUrlParser: true,
@@ -100,14 +100,16 @@ const getUserReviews = async (req, res) => {
 
     const reviewIds = user.reviews;
     const reviewCollection = db.collection("Reviews");
-    const reviews = await reviewCollection.find({ _id: { $in: reviewIds } }).toArray();
+    const reviews = await reviewCollection
+      .find({ _id: { $in: reviewIds } })
+      .toArray();
 
     const flyCollection = db.collection("Flies");
     const reviewsWithFlyNames = await Promise.all(
       reviews.map(async (review) => {
         const flyId = parseInt(review.flyId, 10);
         const fly = await flyCollection.findOne({ _id: flyId });
-                return { ...review, flyName: fly };
+        return { ...review, flyName: fly };
       })
     );
 
@@ -176,13 +178,12 @@ const updateFavorites = async (req, res) => {
       result = await db
         .collection("Users")
         .updateOne({ _id: userId }, { $pull: { favoriteFlies: flyId } });
-        message = "Fly removed from favorites"
+      message = "Fly removed from favorites";
     } else {
       result = await db
         .collection("Users")
         .updateOne({ _id: userId }, { $addToSet: { favoriteFlies: flyId } });
-        message = "Fly added to favorites"
-
+      message = "Fly added to favorites";
     }
     // If the modifiedCount property of the result object is truthy, return a success response
     // Otherwise, return a failure response
@@ -220,26 +221,20 @@ const postReview = async (req, res) => {
       reviewText,
       author,
       date: currentDate,
-    }
+    };
     // Insert a new review document into the Reviews collection
     const result = await db.collection("Reviews").insertOne(newReview);
 
     // Update the Fly document in the Flies collection to add the new review ID
     const flyResult = await db
       .collection("Flies")
-      .updateOne(
-        { _id: Number(_id) },
-        { $push: { reviews: reviewId } }
-      );
+      .updateOne({ _id: Number(_id) }, { $push: { reviews: reviewId } });
     console.log("fly updated: ", flyResult);
 
     // Update the User document in the Users collection to add the new review ID
     const userResult = await db
       .collection("Users")
-      .updateOne( 
-        { _id: req.body.email },
-        { $push: { reviews: reviewId } }
-      );
+      .updateOne({ _id: req.body.email }, { $push: { reviews: reviewId } });
     console.log("user updated: ", userResult);
 
     res.status(201).json({ message: "Review posted successfully" });
@@ -257,12 +252,12 @@ const getAllReviews = async (req, res) => {
 
   try {
     await client.connect();
-    const db = client.db('FlyGuide');
-    const reviews = await db.collection('Reviews').find().toArray();
+    const db = client.db("FlyGuide");
+    const reviews = await db.collection("Reviews").find().toArray();
     res.status(200).json({ success: true, data: reviews });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, error: 'Server error' });
+    res.status(500).json({ success: false, error: "Server error" });
   } finally {
     await client.close();
   }
@@ -271,18 +266,15 @@ const getAllReviews = async (req, res) => {
 // ** Get all reviews by fly id **
 const getReviews = async (req, res) => {
   const { _id } = req.params;
-  console.log(`Fetching reviews for fly with ID ${_id}`);
-
-
   const client = new MongoClient(MONGO_URI, options);
 
   try {
     await client.connect();
     const db = client.db("FlyGuide");
     const reviewsCollection = db.collection("Reviews");
-    const reviews = await reviewsCollection.find({ flyId: String(_id) }).toArray();
-    console.log(`Found ${reviews.length} reviews for fly with ID ${_id}:`);
-    console.log(reviews);
+    const reviews = await reviewsCollection
+      .find({ flyId: String(_id) })
+      .toArray();
     res.status(200).json({ data: { reviews } });
   } catch (error) {
     console.error(error);
@@ -294,18 +286,80 @@ const getReviews = async (req, res) => {
 
 // Edit a review
 const updateReview = async (req, res) => {
-  const { userId, flyId, rating, comment } = req.body;
-  const reviewId = req.params.reviewId;
-  // connect to MongoDB and update the review with the given reviewId
-  // return a success or error response
+  const { userId, reviewText } = req.body;
+  const { reviewId } = req.params;
+
+  const client = new MongoClient(MONGO_URI, options);
+
+  try {
+    await client.connect();
+    const db = client.db("FlyGuide");
+    const reviewsCollection = db.collection("Reviews");
+    console.log("reviewId type:", typeof reviewId);
+    const review = await reviewsCollection.findOne({ _id: String(reviewId) });
+    console.log("Review:", review);
+
+    if (!review) {
+      res.status(404).json({ message: "Review not found." });
+      return;
+    }
+
+    if (review.userId !== userId) {
+      res.status(401).json({ message: "Unauthorized." });
+      return;
+    }
+
+    await reviewsCollection.updateOne(
+      { _id: String(reviewId) },
+      { $set: { reviewText: reviewText } }
+    );
+    console.log("Review updated successfully");
+
+    res.status(200).json({ message: "Review updated successfully." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error." });
+  } finally {
+    client.close();
+  }
 };
 
 // Delete a review
 const deleteReview = async (req, res) => {
   const { userId, flyId } = req.body;
   const reviewId = req.params.reviewId;
-  // connect to MongoDB and remove the review with the given reviewId
-  // return a success or error response
+
+  console.log("Deleting review with ID:", reviewId);
+
+  const client = new MongoClient(MONGO_URI, options);
+
+  try {
+    await client.connect();
+    const db = client.db("FlyGuide");
+    const reviewsCollection = db.collection("Reviews");
+    console.log("reviewId:", reviewId);
+    const review = await reviewsCollection.findOne({ _id: String(reviewId) });
+    console.log("review:", review);
+
+    if (!review) {
+      res.status(404).json({ message: "Review not found." });
+      return;
+    }
+
+    if (review.userId !== userId) {
+      res.status(401).json({ message: "Unauthorized." });
+      return;
+    }
+
+    await reviewsCollection.deleteOne({ _id: String(reviewId) });
+    console.log("Review deleted successfully");
+    res.status(200).json({ message: "Review deleted successfully." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error." });
+  } finally {
+    client.close();
+  }
 };
 
 module.exports = {

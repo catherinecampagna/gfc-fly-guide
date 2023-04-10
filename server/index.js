@@ -30,8 +30,8 @@ express()
 .get("/fly/:_id/reviews", getReviews) // endpoint to get reviews for a specific fly
 .post("/user/:_id", createUser) // endpoint to create a user
 .post("/fly/:_id/reviews", postReview) // endpoint to post a new review for a fly
-.put("/fly/:_id/reviews/:reviewId", updateReview) // endpoint to update an existing review for a fly
-.delete("/fly/:_id/reviews/:reviewId", deleteReview) // endpoint to delete a review for a fly
+.put("/review/:reviewId", updateReview) // endpoint to update an existing review for a fly
+.delete("/review/:reviewId", deleteReview) // endpoint to delete a review for a fly
 
 .put("/user/:_id/favoriteFlies", updateFavorites) // Endpoint to add a fly to user's favorite flies list
 
