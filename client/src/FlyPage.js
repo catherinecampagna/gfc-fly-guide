@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
 import ReviewCard from "./components/ReviewCard";
+import { UserContext } from "./UserContext";
+import { FiHeart } from "react-icons/fi";
+
+
 
 const FlyPage = () => {
   const { id } = useParams();
   const [fly, setFly] = useState(null);
+  const { currentUser } = useContext(UserContext);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+
 
   useEffect(() => {
     fetch(`/fly/${id}`)
@@ -16,10 +24,35 @@ const FlyPage = () => {
           throw new Error("Error");
         }
         setFly(data.data);
+        if (currentUser) {
+          setIsFavorite(currentUser.favoriteFlies.includes(data.data._id));
+        }
       });
-  }, [id]);
+  }, [id, currentUser]);
 
-  console.log(fly);
+  const updateFavorites = async (flyId) => {
+    try {
+      const res = await fetch(`/user/${currentUser.email}/favoriteFlies`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ flyId: flyId }),
+      });
+      const data = await res.json();
+      console.log("response:", data);
+      setIsFavorite(!isFavorite);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleFavoriteClick = () => {
+    if (currentUser) {
+      updateFavorites(fly._id);
+    }
+  };
+
   return (
     <Container>
       {fly ? (
@@ -27,6 +60,7 @@ const FlyPage = () => {
           <LeftContainer>
             <TopLeftContainer>
               <Sidebar />
+              
             </TopLeftContainer>
             <Title>The {fly.flyName}</Title>
           </LeftContainer>
@@ -59,6 +93,12 @@ const FlyPage = () => {
               </CardLeft>
               <CardRight>
                 <Image src={`/images/flies/${fly._id}.png`} alt={fly.flyName} />
+                {currentUser && (
+                <HeartContainer onClick={handleFavoriteClick} isFavorite={isFavorite}>
+                  <HeartIcon />
+                  {isFavorite ? "This fly is a favourite" : "Add to favorite"}
+                </HeartContainer>
+              )}
               </CardRight>
             </Card>
             <ReviewContainer>
@@ -183,7 +223,7 @@ const CardRight = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: left;
+  align-items: right;
 `;
 
 const FlyName = styled.h4`
@@ -225,6 +265,19 @@ const RightContainer = styled.div`
   flex-direction: column;
   background-color: var(--color-background-secondary);
   height: auto;
+`;
+
+const HeartContainer = styled.div`
+display: flex;
+flex-direction: row;
+margin-top: 10px;
+  cursor: pointer;
+color: ${(props) => (props.isFavorite ? "red" : "gray")};
+`;
+
+const HeartIcon = styled(FiHeart)`
+margin: 4px 10px;
+
 `;
 
 export default FlyPage;
